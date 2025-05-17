@@ -1,16 +1,17 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import ContextComponent from './components/ContextComponent'
+import StateExample from './components/StateExample'
+import { NotesProvider } from './context/useNotes'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <>
-      <div>hello
-      </div>
-    </>
+    <div className='container'>
+      <StateExample />
+      {/* <NotesProvider>
+        <ContextComponent/>
+      </NotesProvider> */}
+    </div>
   )
 }
 
