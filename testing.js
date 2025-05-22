@@ -31,7 +31,7 @@ const filterExample=products.filter(product=>product.price>300 && product.price<
 filterExample
 
 const reduceExample=products.reduce((acc,product)=>{
-    total=acc+product.price;
+    const total=acc+product.price;
     return total
 },0)
 reduceExample
@@ -72,13 +72,13 @@ const people = [
   { id: 3, name: "Charlie", age: 28, email: "charlie@example.com" },
 ];
 
-const copyPeople={...people}
+// const copyPeople=[...people]
 // const copyPeople=people
-// const copyPeople = JSON.parse(JSON.stringify(people));
+const copyPeople = JSON.parse(JSON.stringify(people));
 
 copyPeople[0].name= "Abdullah"
-console.log(copyPeople[0].name)
-console.log(people[0].name)
+console.log("copyPeople",copyPeople[0].name)
+console.log("people",people[0].name)
 
 
 const user = {
@@ -90,6 +90,28 @@ const user = {
 // Create a shallow copy
 const updatedUser = { ...user, name: "Alicia" };
 
-console.log(user.name);        
-console.log(updatedUser.name);
+console.log("User",user.name);        
+console.log("Updated User",updatedUser.name);
 
+
+
+//for in loop
+const person = {fname:"John", lname:"Doe", age:25};
+
+let text = "";
+for (let x in person) {
+  text += person[x];
+  console.log("for in loop",x,person[x])
+}
+
+
+//for of loop
+const fruits = ["apple", "banana", "cherry"];
+// for (key in object) {
+   // code block to be executed
+// }
+let text1 = "";
+for (let x of fruits) {
+  text1 += x + " ";
+  console.log("for off loop",x)
+}
