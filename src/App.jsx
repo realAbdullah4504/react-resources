@@ -10,6 +10,7 @@ import About from "./pages/About"
 import ProtectedPage from "./pages/ProtectedPage";
 import ProtectedRoute from './components/ProtectedRoute';
 import DashboardLayout from './components/layouts/DashboardLayout';
+import Signin from './pages/Signin';
 
 function App() {
 
@@ -27,6 +28,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
+        <Route path="/login" element={<Signin />} />
         <Route path="/protected-page" element={<ProtectedRoute />}>
           <Route element={<DashboardLayout />} >
             <Route index element={<ProtectedPage />} />
