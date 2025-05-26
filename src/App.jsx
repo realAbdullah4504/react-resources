@@ -13,6 +13,7 @@ import DashboardLayout from "./components/layouts/DashboardLayout";
 import Signin from "./pages/Signin";
 import MongodbState from "./components3/MongodbState";
 import Signup from "./pages/Signup";
+import VerifyEmail from "./components3/MongodbState/VerifyEmail";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/login" element={<Signin />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/verify-email" element={<VerifyEmail />} />
         <Route path="/protected-page" element={<ProtectedRoute />}>
           <Route element={<DashboardLayout />}>
             <Route index element={<ProtectedPage />} />
