@@ -84,7 +84,7 @@ const MongodbState = () => {
     if (loading) return <p>Loading notes...</p>;
 
     return (
-        <div className="flex gap-[10px]">
+        <div className="">
             <AddNotes handleAddNote={handleAddNote} handleUpdateNote={handleUpdateNote} editableNote={editableNote} />
             <RenderNotes notes={notes} handleDeleteNote={handleDeleteNote} handleEditableNote={handleEditableNote} />
         </div>

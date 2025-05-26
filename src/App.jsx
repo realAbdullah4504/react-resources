@@ -12,7 +12,6 @@ import ProtectedRoute from './components2/ProtectedRoute';
 import DashboardLayout from './components/layouts/DashboardLayout';
 import Signin from './pages/Signin';
 import MongodbState from './components3/MongodbState';
-
 function App() {
 
 
@@ -30,19 +29,19 @@ function App() {
         <ContextComponent/>
       </NotesProvider> */}
       {/* *********************************route section **************************} */}
-      {/* <Routes>
+      <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/login" element={<Signin />} />
         <Route path="/protected-page" element={<ProtectedRoute />}>
           <Route element={<DashboardLayout />} >
             <Route index element={<ProtectedPage />} />
-            <Route path="settings" element={<div>Settings Page</div>} />
+            <Route path="settings" element={<MongodbState />} />
           </Route>
         </Route>
-      </Routes> */}
+      </Routes>
       {/* *********************************mongodb custom backend state update section **************************} */}
-      <MongodbState />
+      
     </div>
   )
 }

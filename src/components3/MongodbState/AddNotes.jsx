@@ -40,7 +40,7 @@ const AddNotes = ({ handleAddNote, editableNote, handleUpdateNote }) => {
       <form >
         <input type="text" name="title" value={note.title} placeholder="Enter title" onChange={handleChange} />
         <input type='text' name="description" value={note.description} placeholder='Enter description' onChange={handleChange} />
-        <button type="submit" onClick={handleSubmit}>{!editableNote ? "Add Note" : "Update Note"}</button>
+        <button type="submit" className='px-2 rounded bg-black text-white cursor-pointer' onClick={handleSubmit}>{!editableNote ? "Add Note" : "Update Note"}</button>
       </form>
     </div>
   )
