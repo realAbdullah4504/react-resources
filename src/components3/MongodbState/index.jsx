@@ -62,7 +62,7 @@ const MongodbState = () => {
   };
 
   return (
-    <div className="">
+    <div className="flex gap-4">
       <AddNotes
         handleAddNote={handleAddNote}
         handleUpdateNote={handleUpdateNote}
