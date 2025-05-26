@@ -9,7 +9,7 @@ export const AuthProvider = ({ children }) => {
     useEffect(() => {
         const checkAuth = async () => {
             try {
-                const response = await fetch('http://localhost:3000/protected', {
+                const response = await fetch('http://localhost:3000/api/protected', {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -31,7 +31,7 @@ export const AuthProvider = ({ children }) => {
 
 
     const login = async (username, password) => {
-        const response = await fetch('http://localhost:3000/login', {
+        const response = await fetch('http://localhost:3000/api/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

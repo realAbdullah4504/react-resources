@@ -8,23 +8,28 @@ import { Route, Routes } from 'react-router-dom';
 import Home from "./pages/Home";
 import About from "./pages/About"
 import ProtectedPage from "./pages/ProtectedPage";
-import ProtectedRoute from './components/ProtectedRoute';
+import ProtectedRoute from './components2/ProtectedRoute';
 import DashboardLayout from './components/layouts/DashboardLayout';
 import Signin from './pages/Signin';
+import MongodbState from './components3/MongodbState';
 
 function App() {
 
 
   return (
     <div className=''>
+      {/* *********************************react Elements section **************************} */}
       {/* <ReactElements /> */}
       {/* <div className="bg-avocado-400 font-sans container px-4 mx-auto">
         This uses your custom theme!
       </div> */}
+      {/* *********************************useState section **************************} */}
       {/* <StateExample /> */}
+      {/* *********************************context api section **************************} */}
       {/* <NotesProvider>
         <ContextComponent/>
       </NotesProvider> */}
+      {/* *********************************route section **************************} */}
       {/* <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
@@ -36,6 +41,8 @@ function App() {
           </Route>
         </Route>
       </Routes> */}
+      {/* *********************************mongodb custom backend state update section **************************} */}
+      <MongodbState />
     </div>
   )
 }

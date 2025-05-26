@@ -8,7 +8,7 @@ const ProtectedPage = () => {
 
     (async () => {
       try {
-        const response = await fetch('http://localhost:3000');
+        const response = await fetch('http://localhost:3000/api');
         const data = await response.json();
         setResponse(data);
         console.log('Fetched data:', data);
