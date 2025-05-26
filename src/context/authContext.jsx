@@ -16,11 +16,43 @@ export const AuthProvider = ({ children }) => {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         });
+        if (response.status === 401) {
+          const refreshRes = await fetch("http://localhost:3000/api/refresh-token", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ refreshToken: localStorage.getItem("refreshToken") })
+          })
+          if (!refreshRes.ok) {
+            localStorage.removeItem("token");
+            localStorage.removeItem("refreshToken");
+            setUser(null);
+            return;
+          }
+          const refreshData = await refreshRes.json();
+          localStorage.setItem("token", refreshData.token);
+          const retryResponse = await fetch("http://localhost:3000/api/protected", {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${refreshData.token}`,
+            },
+          });
+          if (!retryResponse.ok) {
+            setUser(null);
+            return;
+          }
+          const retryData = await retryResponse.json();
+          setUser(retryData.user);
+          return;
+        }
         const data = await response.json();
         setUser(data.user);
       } catch (error) {
         console.error("Error checking authentication:", error);
-        setUser(null);
+        if (!localStorage.getItem("token")) {
+          setUser(null);
+        }
       } finally {
         setLoading(false);
       }
@@ -40,6 +72,7 @@ export const AuthProvider = ({ children }) => {
     if (!response.ok) throw new Error("Login failed");
     const data = await response.json();
     localStorage.setItem("token", data.token);
+    localStorage.setItem("refreshToken", data.refreshToken);
     setUser(data.user);
   };
 
