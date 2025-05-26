@@ -6,6 +6,7 @@ const MongodbState = () => {
     const [notes, setNotes] = useState([]);
     const [loading, setLoading] = useState(true); // for initial fetch
     const [actionLoading, setActionLoading] = useState(false); // for add/delete actions
+    const [editableNote, setEditableNote] = useState();
 
     useEffect(() => {
         const fetchNotes = async () => {
@@ -56,14 +57,19 @@ const MongodbState = () => {
         }
     };
 
-    const handleUpdateNote = async (id) => {
+    const handleUpdateNote = async (note) => {
         try {
             setActionLoading(true);
-            const response = await fetch(`http://localhost:3000/api/notes/${id}`, {
-                method: 'PUT'
+            const response = await fetch(`http://localhost:3000/api/notes/${note._id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(note)
             });
             const data = await response.json();
-            setNotes(prev => prev.filter(note => note._id !== data._id));
+            setNotes(prev => prev.map(note => note._id === data._id ? data : note));
+            setEditableNote(null);
         } catch (error) {
             console.error("Delete error:", error);
         } finally {
@@ -71,12 +77,16 @@ const MongodbState = () => {
         }
     }
 
+    const handleEditableNote = (note) => {
+        setEditableNote(note)
+    }
+
     if (loading) return <p>Loading notes...</p>;
 
     return (
         <div className="flex gap-[10px]">
-            <AddNotes handleAddNote={handleAddNote} handleUpdateNote={handleUpdateNote} />
-            <RenderNotes notes={notes} handleDeleteNote={handleDeleteNote} />
+            <AddNotes handleAddNote={handleAddNote} handleUpdateNote={handleUpdateNote} editableNote={editableNote} />
+            <RenderNotes notes={notes} handleDeleteNote={handleDeleteNote} handleEditableNote={handleEditableNote} />
         </div>
     );
 };

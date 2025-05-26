@@ -1,10 +1,15 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
-const AddNotes = ({handleAddNote}) => {
+const AddNotes = ({ handleAddNote, editableNote, handleUpdateNote }) => {
   const [note, setNote] = useState({
     title: '',
     description: ''
   })
+
+  useEffect(() => {
+    if (editableNote)
+      setNote(editableNote)
+  }, [editableNote])
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -17,14 +22,25 @@ const AddNotes = ({handleAddNote}) => {
     ))
   }
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (editableNote)
+      handleUpdateNote(note)
+    else
+      handleAddNote(note)
+    setNote({
+      title: '',
+      description: ''
+    })
+  }
+
+
   return (
     <div>
       <form >
-        <input type="text" name="title" value={note.title} placeholder="Enter title" onChange={handleChange}/>
-        <input type='text' name="description" value={note.description} placeholder='Enter description' onChange={handleChange}/>
-        <button type="submit" onClick={(e) => {
-          e.preventDefault();
-          handleAddNote(note)}}>Add Note</button>
+        <input type="text" name="title" value={note.title} placeholder="Enter title" onChange={handleChange} />
+        <input type='text' name="description" value={note.description} placeholder='Enter description' onChange={handleChange} />
+        <button type="submit" onClick={handleSubmit}>{!editableNote ? "Add Note" : "Update Note"}</button>
       </form>
     </div>
   )
