@@ -1,9 +1,27 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { useAuth } from "../../context/authContext";
 
 const DashboardLayout = () => {
   const { logout } = useAuth();
+  const [notes, setNotes] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchNotes = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/api/notes");
+        const data = await response.json();
+        setNotes(data);
+      } catch (error) {
+        console.error("Fetch error:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchNotes();
+  }, []);
+
   return (
     <div className="flex flex-col h-screen">
       <div className="bg-gray-800 text-white p-4">
@@ -26,7 +44,13 @@ const DashboardLayout = () => {
             logout
           </button>
         </div>
-        <Outlet />
+        <div className="p-4">
+          {loading ? (
+            <div>Loading notes...</div>
+          ) : (
+            <Outlet context={{ notes, setNotes }} />
+          )}
+        </div>
       </div>
     </div>
   );
