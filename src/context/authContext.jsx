@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }) => {
                 console.error('Error checking authentication:', error);
                 setUser(null);
             } finally {
-                setLoading(false); // 👈 set loading to false after check
+                setLoading(false);
             }
         };
 

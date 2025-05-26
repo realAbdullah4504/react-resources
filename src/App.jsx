@@ -25,7 +25,7 @@ function App() {
       {/* <NotesProvider>
         <ContextComponent/>
       </NotesProvider> */}
-      <Routes>
+      {/* <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/login" element={<Signin />} />
@@ -35,7 +35,7 @@ function App() {
             <Route path="settings" element={<div>Settings Page</div>} />
           </Route>
         </Route>
-      </Routes>
+      </Routes> */}
     </div>
   )
 }

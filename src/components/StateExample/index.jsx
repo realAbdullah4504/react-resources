@@ -2,26 +2,23 @@ import React, { useState } from 'react'
 import RenderNotes from './RenderNotes';
 import AddNotes from './AddNotes';
 
-const initialNotes = [
+const initialNotes=[
     {
         id: 1,
-        title: "Meeting Notes",
-        content: "Discussed project roadmap and assigned tasks.",
-        pinned: false,
+        title: 'Note 1',
+        description: 'This is the first note'
     },
     {
         id: 2,
-        title: "Shopping List",
-        content: "Milk, Eggs, Bread, Butter",
-        pinned: true,
+        title: 'Note 2',
+        description: 'This is the second note'
     },
     {
         id: 3,
-        title: "Ideas",
-        content: "Build a note-taking app using React and localStorage.",
-        pinned: false,
-    }
-];
+        title: 'Note 3',
+        description: 'This is the third note'
+    },
+]
 
 
 
