@@ -38,8 +38,8 @@ function App() {
         <Route path="/verify-email" element={<VerifyEmail />} />
         <Route path="/protected-page" element={<ProtectedRoute />}>
           <Route element={<DashboardLayout />}>
-            <Route index element={<ProtectedPage />} />
-            <Route path="settings" element={<MongodbState />} />
+            <Route index element={<MongodbState />} />
+            <Route path="settings" element={<ProtectedPage />} />
           </Route>
         </Route>
       </Routes>
