@@ -9,8 +9,14 @@ const DashboardLayout = () => {
 
   useEffect(() => {
     const fetchNotes = async () => {
+      const token = localStorage.getItem("token");
       try {
-        const response = await fetch("http://localhost:3000/api/notes");
+        const response = await fetch("http://localhost:3000/api/notes", {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
         const data = await response.json();
         setNotes(data);
       } catch (error) {

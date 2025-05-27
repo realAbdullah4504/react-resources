@@ -8,11 +8,13 @@ const MongodbState = () => {
   const [editableNote, setEditableNote] = useState();
 
   const handleAddNote = async (newNote) => {
+    const token = localStorage.getItem("token");
     try {
       const response = await fetch("http://localhost:3000/api/notes", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(newNote),
       });
@@ -24,9 +26,14 @@ const MongodbState = () => {
   };
 
   const handleDeleteNote = async (id) => {
+    const token = localStorage.getItem("token");
     try {
       const response = await fetch(`http://localhost:3000/api/notes/${id}`, {
         method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
       });
       const data = await response.json();
       setNotes((prev) => prev.filter((note) => note._id !== data._id));
@@ -36,6 +43,7 @@ const MongodbState = () => {
   };
 
   const handleUpdateNote = async (note) => {
+    const token = localStorage.getItem("token");
     try {
       const response = await fetch(
         `http://localhost:3000/api/notes/${note._id}`,
@@ -43,6 +51,7 @@ const MongodbState = () => {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify(note),
         }
@@ -53,7 +62,7 @@ const MongodbState = () => {
       );
       setEditableNote(null);
     } catch (error) {
-      console.error("Delete error:", error);
+      console.error("Update error:", error);
     }
   };
 

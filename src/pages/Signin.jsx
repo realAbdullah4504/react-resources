@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 const Signin = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    username: "",
+    email: "",
     password: "",
   });
 
@@ -24,7 +24,7 @@ const Signin = () => {
     e.preventDefault();
     setError("");
     try {
-      await login(formData.username, formData.password);
+      await login(formData.email, formData.password);
       console.log("Login successful");
       navigate("/protected-page");
     } catch (err) {
@@ -42,11 +42,11 @@ const Signin = () => {
       >
         <input
           type="text"
-          placeholder="username"
+          placeholder="Email"
           className="w-full p-3 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-          name="username"
+          name="email"
           onChange={handleChange}
-          value={formData.username}
+          value={formData.email}
         />
         <input
           type="password"

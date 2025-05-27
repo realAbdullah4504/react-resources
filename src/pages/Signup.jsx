@@ -5,8 +5,8 @@ import { useAuth } from '../context/authContext';
 const Signup = () => {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
-        name: '',
         username: '',
+        email: '',
         password: ''
     });
 
@@ -26,7 +26,7 @@ const Signup = () => {
         e.preventDefault();
         setError('');
         try {
-            await signup(formData.name, formData.username, formData.password);
+            await signup(formData.username, formData.email, formData.password);
             navigate('/protected-page');
         } catch (err) {
             setError(err.message || 'Registration failed. Please try again.');
@@ -46,17 +46,17 @@ const Signup = () => {
                     type="text"
                     placeholder="Full Name"
                     className="w-full p-3 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    name='name'
-                    onChange={handleChange}
-                    value={formData.name}
-                />
-                <input
-                    type="text"
-                    placeholder="Username"
-                    className="w-full p-3 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                     name='username'
                     onChange={handleChange}
                     value={formData.username}
+                />
+                <input
+                    type="text"
+                    placeholder="Email"
+                    className="w-full p-3 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    name='email'
+                    onChange={handleChange}
+                    value={formData.email}
                 />
                 <input
                     type="password"
