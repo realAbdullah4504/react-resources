@@ -1,11 +1,13 @@
 import React from "react";
 import "./App.css"
 import { Button } from "@/components/ui/button"
+import DemoPage from "./payments"
 
 function App() {
   return (
     <div className="">
-      <Button variant="outline">Click me</Button>
+      {/* <Button variant="default">Click me</Button> */}
+      <DemoPage />
     </div>
   );
 }
