@@ -1,14 +1,10 @@
 import React from "react";
 import "./App.css";
-import ContextComponent from "./components";
-import { NotesProvider } from "./context/useNotes";
-
+import MongodbState from "./components";
 function App() {
   return (
     <div className="">
-      <NotesProvider>
-        <ContextComponent/>
-      </NotesProvider>
+      <MongodbState />
     </div>
   );
 }
