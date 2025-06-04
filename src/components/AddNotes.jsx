@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
+import { useNotes } from '../context/useNotes';
 
-const AddNotes = ({ handleAddNote, handleDeleteNote }) => {
+const AddNotes = () => {
+    const { handleAddNote } = useNotes();
     const [note, setNote] = useState({
         title: "",
         content: "",

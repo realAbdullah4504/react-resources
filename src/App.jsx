@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import ContextComponent from "./components/ContextComponent";
+import ContextComponent from "./components";
 import { NotesProvider } from "./context/useNotes";
 
 function App() {
