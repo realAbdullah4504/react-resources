@@ -1,10 +1,9 @@
-import React from 'react'
-import MyVideoConference from './MyVideoConference'
-import { ControlBar, RoomAudioRenderer } from '@livekit/components-react'
+import MyVideoConference from "./MyVideoConference";
+import { ControlBar, RoomAudioRenderer } from "@livekit/components-react";
 
 const Meeting = () => {
   return (
-    <div data-lk-theme="default" style={{ height: "100vh" }}>
+    <div className="meeting-container" data-lk-theme="default">
         {/* Your custom component with basic video conferencing functionality. */}
         <MyVideoConference />
         {/* The RoomAudioRenderer takes care of room-wide audio for you. */}

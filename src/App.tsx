@@ -1,35 +1,61 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import '@livekit/components-styles';
+import { useState } from "react";
+import Meeting from "./Meeting";
+import { Room } from "livekit-client";
+import { RoomContext } from "@livekit/components-react";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const serverUrl = "wss://streamin-app-1wvl2zft.livekit.cloud";
+  const [roomName, setRoomName] = useState("");
+  const [identity, setIdentity] = useState("");
+  const [room] = useState(
+    () =>
+      new Room({
+        // Optimize video quality for each participant's screen
+        adaptiveStream: true,
+        // Enable automatic audio/video quality optimization
+        dynacast: true,
+      })
+  );
 
+  const joinMeeting = async () => {
+    const response = await fetch("http://localhost:3001/get-token", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ identity, roomName }),
+    });
+    const data = await response.json();
+    console.log(data);
+    await room.connect(serverUrl, data.token);
+  };
   return (
     <>
       <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+        <label htmlFor="room">Room:</label>
+        <input
+          type="text"
+          id="room"
+          name="room"
+          onChange={(e) => setRoomName(e.target.value)}
+        />
+        <label htmlFor="identity">Identity:</label>
+        <input
+          type="text"
+          id="identity"
+          name="identity"
+          onChange={(e) => setIdentity(e.target.value)}
+        />
+        <button type="button" onClick={joinMeeting}>
+          Join
         </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+        <RoomContext.Provider value={room}>
+          <Meeting />
+        </RoomContext.Provider>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
