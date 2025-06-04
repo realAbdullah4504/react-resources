@@ -2,16 +2,26 @@ import React, { useEffect, useState } from "react";
 import RenderNotes from "./RenderNotes";
 import AddNotes from "./AddNotes";
 
-const MongodbState = () => {
+const MongodbState = ({ token }) => {
   const [editableNote, setEditableNote] = useState();
   const [notes, setNotes] = useState([]);
 
   useEffect(() => {
+    if (!token) {
+      return;
+    }
+  }, [token]);
+
+  useEffect(() => {
     const fetchNotes = async () => {
+      if (!token) {
+        return;
+      }
       try {
         const response = await fetch("http://localhost:3000/api/notes", {
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
         });
         const data = await response.json();
@@ -21,7 +31,7 @@ const MongodbState = () => {
       }
     };
     fetchNotes();
-  }, []);
+  }, [token]);
 
   const handleAddNote = async (newNote) => {
     try {
@@ -29,6 +39,7 @@ const MongodbState = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(newNote),
       });
@@ -45,6 +56,7 @@ const MongodbState = () => {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
       });
       const data = await response.json();
@@ -62,6 +74,7 @@ const MongodbState = () => {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify(note),
         }
