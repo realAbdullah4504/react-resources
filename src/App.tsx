@@ -1,8 +1,16 @@
-
+import OptimisticUpdate from "./components/OptimisticUpdate";
+import Search from "./components/Search";
+import Toggle from "./components/Toggle";
+import MultiSelect from "./components/MultiSelect";
+import LongList from "./components/Long";
 function App() {
   return (
     <div>
-      <h1>App</h1>
+      <OptimisticUpdate />
+      <Search />
+      <Toggle />
+      <MultiSelect />
+      <LongList />
     </div>
   );
 }
