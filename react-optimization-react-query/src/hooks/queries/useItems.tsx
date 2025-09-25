@@ -8,7 +8,7 @@ export const useItems = (category?: string) => {
       const data = await apiHandler(
         `${import.meta.env.VITE_API_URL}/items/${category}`
       );
-      return data.data.items;
+      return data.items;
     },
     enabled: !!category,
   });

@@ -5,7 +5,7 @@ import cors from "cors";
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-const buttons = [
+const categories = [
     { id: 1, name: "Furniture" },
     { id: 2, name: "Toys" },
     { id: 3, name: "Clothing" },
@@ -20,30 +20,30 @@ const items = [
     { id: 6, category: "Clothing", price: 50, name: "Shirt" },
 ];
 
-let selectedButton = null;
+let selectedCategory = null;
 // Middleware
 app.use(express.json()); // For parsing JSON requests
 app.use(cors());
 app.get("/category", (req, res) => {
-    res.send(buttons);
+    res.send(categories);
 });
 
 app.post("/category", (req, res) => {
     const { name } = req.body;
-    const newButton = { id: buttons.length + 1, name };
-    buttons.push(newButton);
-    res.send(newButton);
+    const newCategory = { id: categories.length + 1, name };
+    categories.push(newCategory);
+    res.send(newCategory);
 });
 
-app.get("/selectedButton", (req, res) => {
-    res.send(selectedButton);
+app.get("/selectedCategory", (req, res) => {
+    res.send(selectedCategory);
 });
 
-app.post("/selectedButton", async (req, res) => {
-    const { id } = req.body;
+app.post("/selectedCategory", async (req, res) => {
+    const { category } = req.body;
     await new Promise((resolve, reject) => setTimeout(resolve, 1000));
-    selectedButton = buttons.find((button) => button.id === id);
-    res.send(selectedButton);
+    selectedCategory = categories.find((c) => c.id === category.id);
+    res.send(selectedCategory);
 });
 
 app.get("/items/:category", (req, res) => {

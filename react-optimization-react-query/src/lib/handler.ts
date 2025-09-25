@@ -9,16 +9,12 @@ type RequestConfig = {
   cache?: RequestCache;
 };
 
-type ApiResponse<T = any> = {
-  data: T | null;
-  error: Error | null;
-  status: number | null;
-};
+// Remove the custom ApiResponse type as React Query handles this internally
 
 export const apiHandler = async <T = any>(
   endpoint: string,
   config: RequestConfig = { method: 'GET' }
-): Promise<ApiResponse<T>> => {
+): Promise<T> => {
   const defaultHeaders: Record<string, string> = {
     'Content-Type': 'application/json',
   };
@@ -41,36 +37,20 @@ export const apiHandler = async <T = any>(
       : JSON.stringify(config.body);
   }
 
-  try {
-    const response = await fetch(endpoint, requestConfig);
-    
-    if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
-      throw new Error(
-        errorData.message || `HTTP error! status: ${response.status}`
-      );
-    }
-
-    // For 204 No Content responses
-    if (response.status === 204) {
-      return { data: null as unknown as T, error: null, status: 204 };
-    }
-
-    const data = await response.json().catch(() => ({}));
-    
-    return {
-      data,
-      error: null,
-      status: response.status,
-    };
-  } catch (error) {
-    console.error('API call failed:', error);
-    return {
-      data: null,
-      error: error instanceof Error ? error : new Error('An unknown error occurred'),
-      status: null,
-    };
+  const response = await fetch(endpoint, requestConfig);
+  
+  // For 204 No Content responses
+  if (response.status === 204) {
+    return null as unknown as T;
   }
+
+  // Let React Query handle non-200 responses
+  if (!response.ok) {
+    const error = await response.json().catch(() => ({}));
+    throw new Error(error.message || `HTTP error! status: ${response.status}`);
+  }
+
+  return response.json();
 };
 
 // For backward compatibility

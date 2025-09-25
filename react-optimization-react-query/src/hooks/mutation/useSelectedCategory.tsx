@@ -2,23 +2,23 @@ import { useMutation } from "@tanstack/react-query";
 import { apiHandler } from "../../lib/handler";
 import { queryClient } from "../../lib/queryClient";
 
-const useSelectedCategory = () => {
+export const useSelectedCategoryMutation = () => {
   const selectCategoryMutation = useMutation({
-    mutationFn: ({ id }: { id: number }) =>
-      apiHandler(`${import.meta.env.VITE_API_URL}/selectedButton`, {
+    mutationFn: (category ) =>
+      apiHandler(`${import.meta.env.VITE_API_URL}/selectedCategory`, {
         method: "POST",
-        body: JSON.stringify({ id: id }),
+        body: JSON.stringify({ category }),
       }),
-    onMutate: async ({ id }) => {
+    onMutate: async (category) => {
       await queryClient.cancelQueries({
-        queryKey: ["selectedButton"],
+        queryKey: ["selectedCategory"],
       });
-      queryClient.setQueryData(["selectedButton"], id);
-      const previousData = queryClient.getQueryData(["selectedButton"]);
+      queryClient.setQueryData(["selectedCategory"], category);
+      const previousData = queryClient.getQueryData(["selectedCategory"]);
       return { previousData };
     },
     onError: (error, variables, context) => {
-      queryClient.setQueryData(["selectedButton"], context?.previousData);
+      queryClient.setQueryData(["selectedCategory"], context?.previousData);
     },
   });
   return {
@@ -29,5 +29,3 @@ const useSelectedCategory = () => {
     error: selectCategoryMutation.error,
   };
 };
-
-export default useSelectedCategory;

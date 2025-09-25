@@ -4,10 +4,7 @@ import { apiHandler } from "../../lib/handler";
 export const useCategories = () => {
   const categories = useQuery({
     queryKey: ["categories"],
-    queryFn: async () => {
-      const data = await apiHandler(`${import.meta.env.VITE_API_URL}/category`);
-      return data.data;
-    },
+    queryFn: () => apiHandler(`${import.meta.env.VITE_API_URL}/category`),
   });
   return categories;
 };
