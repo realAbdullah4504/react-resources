@@ -7,7 +7,7 @@ import React, {
 } from "react";
 import Button from "./Button";
 import { useSearchParams } from "react-router-dom";
-import { apiHandler } from "../../lib/handler";
+import { apiHandler } from "../../../../react-optimization-react-query/src/lib/handler";
 
 const OptimisticUpdate = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -32,7 +32,7 @@ const OptimisticUpdate = () => {
   const handleSelect = async (button: { id: number; name: string }) => {
     console.log("1. Starting outer transition");
     startTransition(async () => {
-      // setOptimisticSelectedButtonId(button.id);
+      setOptimisticSelectedButtonId(button.id);
       console.log("2. Making API call");
       const { data, error } = await apiHandler(
         `${import.meta.env.VITE_API_URL}/selectedButton`,
@@ -65,7 +65,7 @@ const OptimisticUpdate = () => {
             key={button.id}
             button={button}
             handleSelect={handleSelect}
-            selectedButton={button.id === selectedButtonId}
+            selectedButton={button.id === optimisticSelectedButtonId}
           />
         ))}
       </div>

@@ -9,12 +9,12 @@ function App() {
     <div>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<DashboardLayout />}>
+          {/* <Route path="/" element={<DashboardLayout />}> */}
             <Route index element={<Home />} />
-            <Route path="member" element={<Member />} />
-            <Route path="profile" element={<Profile />} />
-            <Route path="team" element={<Team />} />
-          </Route>
+            {/* <Route path="member" element={<Member />} /> */}
+            {/* <Route path="profile" element={<Profile />} /> */}
+            {/* <Route path="team" element={<Team />} /> */}
+          {/* </Route> */}
         </Routes>
       </BrowserRouter>
     </div>
