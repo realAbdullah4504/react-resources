@@ -1,20 +1,21 @@
 type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 
-type RequestConfig = {
+type RequestConfig<TBody = unknown> = {
   method?: HttpMethod;
   headers?: Record<string, string>;
-  body?: any;
+  body?: TBody;
   credentials?: RequestCredentials;
   mode?: RequestMode;
   cache?: RequestCache;
 };
 
-// Remove the custom ApiResponse type as React Query handles this internally
-
-export const apiHandler = async <T = any>(
+export const apiHandler = async <
+  TResponse = unknown,
+  TBody = undefined
+>(
   endpoint: string,
-  config: RequestConfig = { method: 'GET' }
-): Promise<T> => {
+  config: RequestConfig<TBody> = { method: 'GET' }
+): Promise<TResponse> => {
   const defaultHeaders: Record<string, string> = {
     'Content-Type': 'application/json',
   };
@@ -31,27 +32,28 @@ export const apiHandler = async <T = any>(
   };
 
   // Only include body for methods that support it
-  if (config.body && !['GET', 'HEAD'].includes(config.method || 'GET')) {
-    requestConfig.body = typeof config.body === 'string' 
-      ? config.body 
-      : JSON.stringify(config.body);
+  if (
+    config.body !== undefined &&
+    !['GET', 'HEAD'].includes(config.method || 'GET')
+  ) {
+    requestConfig.body =
+      typeof config.body === 'string'
+        ? config.body
+        : JSON.stringify(config.body);
   }
 
   const response = await fetch(endpoint, requestConfig);
-  
-  // For 204 No Content responses
+
   if (response.status === 204) {
-    return null as unknown as T;
+    return null as unknown as TResponse;
   }
 
-  // Let React Query handle non-200 responses
   if (!response.ok) {
     const error = await response.json().catch(() => ({}));
-    throw new Error(error.message || `HTTP error! status: ${response.status}`);
+    throw new Error(
+      (error as { message: string }).message || `HTTP error! status: ${response.status}`
+    );
   }
 
-  return response.json();
+  return response.json() as Promise<TResponse>;
 };
-
-// For backward compatibility
-export const handler = apiHandler;

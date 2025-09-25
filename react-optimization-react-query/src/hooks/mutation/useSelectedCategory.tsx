@@ -1,10 +1,11 @@
 import { useMutation } from "@tanstack/react-query";
 import { apiHandler } from "../../lib/handler";
 import { queryClient } from "../../lib/queryClient";
+import type { Category } from "../../types/category";
 
 export const useSelectedCategoryMutation = () => {
   const selectCategoryMutation = useMutation({
-    mutationFn: (category ) =>
+    mutationFn: (category: Category) =>
       apiHandler(`${import.meta.env.VITE_API_URL}/selectedCategory`, {
         method: "POST",
         body: JSON.stringify({ category }),

@@ -2,26 +2,22 @@ import { useSelectedCategoryMutation } from "../../hooks/mutation/useSelectedCat
 import { useCategories, useSelectedCategory } from "../../hooks/queries";
 import Button from "./Button";
 import { useSearchParams } from "react-router-dom";
+import type { Category } from "../../types/category";
 
 const OptimisticUpdate = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const { data: categories } = useCategories();
+  const { categories } = useCategories();
   const { selectCategory } = useSelectedCategoryMutation();
 
-  const { data: selectedCategory } = useSelectedCategory();
-  console.log("selectedCategory", selectedCategory);
+  const { selectedCategory } = useSelectedCategory();
 
-  const handleSelect = async (category: { id: number; name: string }) => {
-    console.log("1. Starting outer transition");
-    console.log("2. Making API call");
+
+  const handleSelect = async (category: Category) => {
     selectCategory(category, {
       onSuccess: () => {
-        console.log("3. Updating UI");
         setSearchParams({ category: category.name });
       },
     });
-    console.log("4. Inner transition scheduled");
-    console.log("5. After outer transition");
   };
   return (
     <div>
@@ -33,7 +29,7 @@ const OptimisticUpdate = () => {
           alignItems: "center",
         }}
       >
-        {categories?.map((category: { id: number; name: string }) => (
+        {categories?.map((category: Category) => (
           <Button
             key={category.id}
             category={category}

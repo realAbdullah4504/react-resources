@@ -4,14 +4,14 @@ import { useItems } from "../../hooks/queries";
 const Filter = () => {
   const [searchParams] = useSearchParams();
   const category = searchParams.get("category");
-  const items = useItems(category as string);
+  const items = useItems(category || undefined);
 
   return (
     <div>
       <h2>Filter</h2>
       <p>Category: {category}</p>
       <ul>
-        {items?.map((item: { id: number; name: string }) => (
+        {items?.map((item) => (
           <li key={item.id}>{item.name}</li>
         ))}
       </ul>

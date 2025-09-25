@@ -1,10 +1,12 @@
+import type { Category } from "../../types/category";
+
 const Button = ({
   category,
   handleSelect,
   selectedButton,
 }: {
-  category: { id: number; name: string };
-  handleSelect: (category: { id: number; name: string }) => void;
+  category: Category;
+  handleSelect: (category: Category) => void;
   selectedButton: boolean;
 }) => {
   return (
