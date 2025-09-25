@@ -1,16 +1,13 @@
-import OptimisticUpdate from "./components/OptimisticUpdate";
-import Search from "./components/Search";
-import Toggle from "./components/Toggle";
-import MultiSelect from "./components/MultiSelect";
-import LongList from "./components/Long";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./components/Home";
 function App() {
   return (
     <div>
-      <OptimisticUpdate />
-      <Search />
-      <Toggle />
-      <MultiSelect />
-      <LongList />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

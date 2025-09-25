@@ -1,38 +1,57 @@
-import React, { useOptimistic, useTransition } from "react";
+import React, {
+  startTransition,
+  useEffect,
+  useOptimistic,
+  useState,
+  useTransition,
+} from "react";
 import Button from "./Button";
+import { useSearchParams } from "react-router-dom";
+import { apiHandler } from "../lib/handler";
 
-const buttons = [
-  { id: 1, name: "Button 1" },
-  { id: 2, name: "Button 2" },
-  { id: 3, name: "Button 3" },
-];
 const OptimisticUpdate = () => {
-  const [selectedButtonId, setSelectedButtonId] = React.useState<number | null>(
-    null
-  );
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [buttons, setButtons] = useState<{ id: number; name: string }[]>([]);
+  const [selectedButtonId, setSelectedButtonId] = useState<number | null>(null);
   const [isPending, startTransition] = useTransition();
-  const [optimisticButtonId, setOptimisticButtonId] = useOptimistic(
-    selectedButtonId,
-    (_current, newId: number | null) => newId
-  );
-  const handleSelect = (button: { id: number; name: string }) => {
-    console.log(button);
-    startTransition(async () => {
-      try {
-        setOptimisticButtonId(button.id);
-        await new Promise((resolve, reject) => setTimeout(resolve, 2000));
-        startTransition(() => {
-          setSelectedButtonId(button.id);
-        });
-      } catch {
-        console.log("Failed to update button");
-      }
-    });
-  };
+  const [optimisticSelectedButtonId, setOptimisticSelectedButtonId] =
+    useOptimistic(selectedButtonId);
 
+  useEffect(() => {
+    const fetchButtons = async () => {
+      const data = await apiHandler(`${import.meta.env.VITE_API_URL}/category`);
+      const selectedButton = await apiHandler(
+        `${import.meta.env.VITE_API_URL}/selectedButton`
+      );
+      setButtons(data.data);
+      setSelectedButtonId(selectedButton.data);
+    };
+    fetchButtons();
+  }, []);
+
+  const handleSelect = async (button: { id: number; name: string }) => {
+    console.log("1. Starting outer transition");
+    startTransition(async () => {
+      // setOptimisticSelectedButtonId(button.id);
+      console.log("2. Making API call");
+      const { data, error } = await apiHandler(
+        `${import.meta.env.VITE_API_URL}/selectedButton`,
+        {
+          method: "POST",
+          body: JSON.stringify({ id: button.id }),
+        }
+      );
+      startTransition(() => {
+        console.log("3. Updating UI");
+        setSelectedButtonId(data.id);
+        setSearchParams({ category: data.name });
+      });
+      console.log("4. Inner transition scheduled");
+    });
+    console.log("5. After outer transition");
+  };
   return (
     <div>
-      <h1>OptimisticUpdate</h1>
       <div
         style={{
           display: "flex",
@@ -41,12 +60,12 @@ const OptimisticUpdate = () => {
           alignItems: "center",
         }}
       >
-        {buttons.map((button) => (
+        {buttons?.map((button) => (
           <Button
             key={button.id}
             button={button}
             handleSelect={handleSelect}
-            selectedButton={button.id === optimisticButtonId}
+            selectedButton={button.id === optimisticSelectedButtonId}
           />
         ))}
       </div>
