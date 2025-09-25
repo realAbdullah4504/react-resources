@@ -7,7 +7,7 @@ import React, {
 } from "react";
 import Button from "./Button";
 import { useSearchParams } from "react-router-dom";
-import { apiHandler } from "../lib/handler";
+import { apiHandler } from "../../lib/handler";
 
 const OptimisticUpdate = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -65,7 +65,7 @@ const OptimisticUpdate = () => {
             key={button.id}
             button={button}
             handleSelect={handleSelect}
-            selectedButton={button.id === optimisticSelectedButtonId}
+            selectedButton={button.id === selectedButtonId}
           />
         ))}
       </div>

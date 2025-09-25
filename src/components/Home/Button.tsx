@@ -10,6 +10,7 @@ const Button = ({
 
   return (
     <button
+    className="p-2 m-2 w-24 rounded card text-white"
       onClick={() => {
         handleSelect(button);
       }}
