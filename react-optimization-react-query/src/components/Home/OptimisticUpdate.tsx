@@ -1,8 +1,7 @@
+import { useSelectedCategoryMutation } from "../../hooks/mutation/useSelectedCategory";
+import { useCategories, useSelectedCategory } from "../../hooks/queries";
 import Button from "./Button";
 import { useSearchParams } from "react-router-dom";
-import { useCategories } from "../../hooks/queries/useCategories";
-import { useSelectedCategoryMutation } from "../../hooks/mutation/useSelectedCategory";
-import { useSelectedCategory } from "../../hooks/queries/useSelectedCategory";
 
 const OptimisticUpdate = () => {
   const [searchParams, setSearchParams] = useSearchParams();

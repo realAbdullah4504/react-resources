@@ -1,5 +1,5 @@
 import { useSearchParams } from "react-router-dom";
-import { useItems } from "../../hooks/queries/useItems";
+import { useItems } from "../../hooks/queries";
 
 const Filter = () => {
   const [searchParams] = useSearchParams();
