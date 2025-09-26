@@ -6,10 +6,13 @@ import type { Category } from "../../types/category";
 export const useSelectedCategoryMutation = () => {
   const selectCategoryMutation = useMutation({
     mutationFn: (category: Category) =>
-      apiHandler(`${import.meta.env.VITE_API_URL}/selectedCategory`, {
-        method: "POST",
-        body: JSON.stringify({ category }),
-      }),
+      apiHandler<Category, string>(
+        `${import.meta.env.VITE_API_URL}/selectedCategory`,
+        {
+          method: "POST",
+          body: JSON.stringify({ category }),
+        }
+      ),
     onMutate: async (category) => {
       await queryClient.cancelQueries({
         queryKey: ["selectedCategory"],
