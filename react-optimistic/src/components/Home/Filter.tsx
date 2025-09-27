@@ -1,27 +1,23 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import { apiHandler } from "../../lib/handler";
+import { Item } from "../../types/items";
 
-const items = [
-  { id: 1, category: "Furniture", price: 100, name: "Table" },
-  { id: 2, category: "Furniture", price: 200, name: "Chair" },
-  { id: 3, category: "Furniture", price: 50, name: "Bed" },
-  { id: 4, category: "Toys", price: 20, name: "Car" },
-  { id: 5, category: "Toys", price: 50, name: "Doll" },
-  { id: 6, category: "Clothing", price: 50, name: "Shirt" },
-];
 const Filter = () => {
   const [searchParams] = useSearchParams();
-  const [filteredItems, setFilteredItems] = useState([]);
-  const category = searchParams.get("category");
+  const [filteredItems, setFilteredItems] = useState<Item[]>([]);
+  const category = searchParams.get("category") as string;
   useEffect(() => {
     const fetchItems = async () => {
-      const response = await fetch(
+      const { data,error } = await apiHandler<{ items: Item[] }>(
         `${import.meta.env.VITE_API_URL}/items/${category}`
       );
-      const data = await response.json();
-      setFilteredItems(data.items);
+      if(error){
+        console.log(error)
+      }
+      setFilteredItems(data?.items || []);
     };
-    fetchItems();
+    void fetchItems();
   }, [category]);
   return (
     <div>

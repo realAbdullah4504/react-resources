@@ -12,15 +12,20 @@ import { apiHandler } from "../../lib/handler";
 const OptimisticUpdate = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [category, setCategory] = useState<{ id: number; name: string }[]>([]);
-  const [selectedCategoryId, setSelectedCategoryId] = useState<number | null>(null);
+  const [selectedCategoryId, setSelectedCategoryId] = useState<number | null>(
+    null
+  );
   const [isPending, startTransition] = useTransition();
   const [optimisticSelectedCategoryId, setOptimisticSelectedCategoryId] =
     useOptimistic(selectedCategoryId);
 
   useEffect(() => {
     const fetchButtons = async () => {
-      const {data, error} = await apiHandler(`${import.meta.env.VITE_API_URL}/category`);
-      const {data: selectedCategory, error: selectedCategoryError} = await apiHandler(`${import.meta.env.VITE_API_URL}/selectedCategory`);
+      const { data, error } = await apiHandler(
+        `${import.meta.env.VITE_API_URL}/category`
+      );
+      const { data: selectedCategory, error: selectedCategoryError } =
+        await apiHandler(`${import.meta.env.VITE_API_URL}/selectedCategory`);
       setCategory(data);
       setSelectedCategoryId(selectedCategory.id);
     };
@@ -29,23 +34,22 @@ const OptimisticUpdate = () => {
 
   const handleSelect = async (category: { id: number; name: string }) => {
     console.log("1. Starting outer transition");
-    // startTransition(async () => {
-    // setOptimisticSelectedButtonId(button.id);
-    console.log("2. Making API call");
-    setSelectedCategoryId(category.id);
-    const {data, error} = await apiHandler(
-      `${import.meta.env.VITE_API_URL}/selectedCategory`,
-      {
-        method: "POST",
-        body: JSON.stringify({ category }),
-      }
-    );
-    // startTransition(() => {
-    console.log("3. Updating UI");
-    setSearchParams({ category: data.name }); 
-    // });
-    console.log("4. Inner transition scheduled");
-    // });
+    startTransition(async () => {
+      setOptimisticSelectedCategoryId(category.id);
+      console.log("2. Making API call");
+      const { data, error } = await apiHandler(
+        `${import.meta.env.VITE_API_URL}/selectedCategory`,
+        {
+          method: "POST",
+          body: JSON.stringify({ category }),
+        }
+      );
+      startTransition(() => {
+        console.log("3. Updating UI");
+        setSearchParams({ category: data.name });
+      });
+      console.log("4. Inner transition scheduled");
+    });
     console.log("5. After outer transition");
   };
   return (

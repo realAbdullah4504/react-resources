@@ -12,7 +12,7 @@ const OptimisticUpdate = () => {
   const { selectedCategory } = useSelectedCategory();
 
 
-  const handleSelect = async (category: Category) => {
+  const handleSelect = (category: Category) => {
     selectCategory(category, {
       onSuccess: () => {
         setSearchParams({ category: category.name });

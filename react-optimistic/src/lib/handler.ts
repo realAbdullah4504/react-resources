@@ -1,24 +1,27 @@
 type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 
-type RequestConfig = {
+type RequestConfig<TBody = unknown> = {
   method?: HttpMethod;
   headers?: Record<string, string>;
-  body?: any;
+  body?: TBody;
   credentials?: RequestCredentials;
   mode?: RequestMode;
   cache?: RequestCache;
 };
 
-type ApiResponse<T = any> = {
+type ApiResponse<T = unknown> = {
   data: T | null;
   error: Error | null;
   status: number | null;
 };
 
-export const apiHandler = async <T = any>(
+export const apiHandler = async <
+  TResponse = unknown,
+  TBody = undefined
+>(
   endpoint: string,
-  config: RequestConfig = { method: 'GET' }
-): Promise<ApiResponse<T>> => {
+  config: RequestConfig<TBody> = { method: 'GET' }
+): Promise<ApiResponse<TResponse>> => {
   const defaultHeaders: Record<string, string> = {
     'Content-Type': 'application/json',
   };
@@ -35,29 +38,34 @@ export const apiHandler = async <T = any>(
   };
 
   // Only include body for methods that support it
-  if (config.body && !['GET', 'HEAD'].includes(config.method || 'GET')) {
-    requestConfig.body = typeof config.body === 'string' 
-      ? config.body 
-      : JSON.stringify(config.body);
+  if (
+    config.body !== undefined &&
+    !['GET', 'HEAD'].includes(config.method || 'GET')
+  ) {
+    requestConfig.body =
+      typeof config.body === 'string'
+        ? config.body
+        : JSON.stringify(config.body);
   }
 
   try {
     const response = await fetch(endpoint, requestConfig);
-    
+
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
       throw new Error(
-        errorData.message || `HTTP error! status: ${response.status}`
+        (errorData as { message?: string }).message ||
+          `HTTP error! status: ${response.status}`
       );
     }
 
     // For 204 No Content responses
     if (response.status === 204) {
-      return { data: null as unknown as T, error: null, status: 204 };
+      return { data: null as unknown as TResponse, error: null, status: 204 };
     }
 
-    const data = await response.json().catch(() => ({}));
-    
+    const data = (await response.json().catch(() => ({}))) as TResponse;
+
     return {
       data,
       error: null,
@@ -67,7 +75,8 @@ export const apiHandler = async <T = any>(
     console.error('API call failed:', error);
     return {
       data: null,
-      error: error instanceof Error ? error : new Error('An unknown error occurred'),
+      error:
+        error instanceof Error ? error : new Error('An unknown error occurred'),
       status: null,
     };
   }
