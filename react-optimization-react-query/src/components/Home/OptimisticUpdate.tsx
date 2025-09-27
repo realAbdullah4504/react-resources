@@ -6,7 +6,7 @@ import type { Category } from "../../types/category";
 
 const OptimisticUpdate = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const { categories } = useCategories();
+  const { categories,error } = useCategories();
   const { selectCategory } = useSelectedCategoryMutation();
 
   const { selectedCategory } = useSelectedCategory();
@@ -29,6 +29,7 @@ const OptimisticUpdate = () => {
           alignItems: "center",
         }}
       >
+        {error && <p>{error.message}</p>}
         {categories?.map((category: Category) => (
           <Button
             key={category.id}

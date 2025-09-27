@@ -1,4 +1,4 @@
-type HttpMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
+type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 
 type RequestConfig<TBody = unknown> = {
   method?: HttpMethod;
@@ -9,32 +9,35 @@ type RequestConfig<TBody = unknown> = {
   cache?: RequestCache;
 };
 
-export const apiHandler = async <TResponse = unknown, TBody = undefined>(
+export const apiHandler = async <
+  TResponse = unknown,
+  TBody = undefined
+>(
   endpoint: string,
-  config: RequestConfig<TBody> = { method: "GET" }
+  config: RequestConfig<TBody> = { method: 'GET' }
 ): Promise<TResponse> => {
   const defaultHeaders: Record<string, string> = {
-    "Content-Type": "application/json",
+    'Content-Type': 'application/json',
   };
 
   const requestConfig: RequestInit = {
-    method: config.method || "GET",
+    method: config.method || 'GET',
     headers: {
       ...defaultHeaders,
       ...(config.headers || {}),
     },
-    credentials: config.credentials || "same-origin",
-    mode: config.mode || "cors",
-    cache: config.cache || "default",
+    credentials: config.credentials || 'same-origin',
+    mode: config.mode || 'cors',
+    cache: config.cache || 'default',
   };
 
   // Only include body for methods that support it
   if (
     config.body !== undefined &&
-    !["GET", "HEAD"].includes(config.method || "GET")
+    !['GET', 'HEAD'].includes(config.method || 'GET')
   ) {
     requestConfig.body =
-      typeof config.body === "string"
+      typeof config.body === 'string'
         ? config.body
         : JSON.stringify(config.body);
   }
@@ -46,10 +49,10 @@ export const apiHandler = async <TResponse = unknown, TBody = undefined>(
   }
 
   if (!response.ok) {
-    const error = await response.json() as { message: string };
+    const error = await response.json().catch(() => ({})) as { message: string };
+    console.log(error,"error")
     throw new Error(
-      (error as { message: string }).message ||
-        `HTTP error! status: ${response.status}`
+      error.message || `HTTP error! status: ${response.status}`
     );
   }
 
