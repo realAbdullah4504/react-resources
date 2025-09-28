@@ -20,6 +20,17 @@ const items = [
     { id: 6, category: "Clothing", price: 50, name: "Shirt" },
 ];
 
+const courses = [
+    { id: 1, name: "React" },
+    { id: 2, name: "Node" },
+    { id: 3, name: "MongoDB" },
+    { id: 4, name: "Express" },
+    { id: 5, name: "Python" },
+    { id: 6, name: "Django" },
+];
+
+let selectedCourses = [];
+
 let selectedCategory = null;
 // Middleware
 app.use(express.json()); // For parsing JSON requests
@@ -52,6 +63,23 @@ app.get("/items/:category", (req, res) => {
     res.json({ items: filteredItems });
 });
 
+app.get("/courses", (req, res) => {
+    res.send({ courses, selectedCourses });
+});
+
+app.post("/selectCourses", async (req, res) => {
+    const apiRandomNumber = Math.random() * 5;
+    console.log(apiRandomNumber);
+    const { course } = req.body;
+    const isSelectedCourse = selectedCourses.find((c) => c.id === course.id);
+    await new Promise((resolve, reject) => setTimeout(resolve, apiRandomNumber * 1000));
+    if (isSelectedCourse) {
+        selectedCourses = selectedCourses.filter((c) => c.id !== course.id);
+    } else {
+        selectedCourses = [...selectedCourses, course];
+    }
+    res.send(selectedCourses);
+});
 
 // Start server
 app.listen(PORT, () => {
