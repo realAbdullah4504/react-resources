@@ -32,11 +32,8 @@ export const useSelectCourseMutation = () => {
       );
       return { previousData };
     },
-    onSuccess: (data) => {
-        queryClient.setQueryData(["selectedCourses"], data);
-    },
     onError: (error, variables, context) => {
-      queryClient.setQueryData(["selectedCourses"], context?.previousData);
+      // queryClient.setQueryData(["selectedCourses"], context?.previousData);
     },
   });
   return {

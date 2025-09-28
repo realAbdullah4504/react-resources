@@ -26,16 +26,23 @@ const MultiSelect = () => {
     );
 
   useEffect(() => {
-    const fetchButtons = async () => {
-      const { data } = await apiHandler<{
-        courses: { id: number; name: string }[];
-        selectedCourses: { id: number; name: string }[];
-      }>(`${import.meta.env.VITE_API_URL}/courses`);
-      setCourses(data?.courses || []);
-      setSelectedCourses(data?.selectedCourses || []);
+    const fetchCourses = async () => {
+      const { data } = await apiHandler<{ id: number; name: string }[]>(
+        `${import.meta.env.VITE_API_URL}/courses`
+      );
+      setCourses(data || []);
     };
-    fetchButtons().catch((error) => {
-      console.error("Error fetching buttons:", error);
+    const fetchSelectedCourses = async () => {
+      const { data } = await apiHandler<{ id: number; name: string }[]>(
+        `${import.meta.env.VITE_API_URL}/selectedCourses`
+      );
+      setSelectedCourses(data || []);
+    };
+    fetchCourses().catch((error) => {
+      console.error("Error fetching courses:", error);
+    });
+    fetchSelectedCourses().catch((error) => {
+      console.error("Error fetching selected courses:", error);
     });
   }, []);
 

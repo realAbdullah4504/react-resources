@@ -1,11 +1,12 @@
 import { useSelectCourseMutation } from "../hooks/mutation";
 import { useCourses, useSelectedCourses } from "../hooks/queries";
 import type { Course } from "../types/courses";
+import { queryClient } from "../lib/queryClient";
 const MultiSelect = () => {
   const { data: courses, isLoading, error } = useCourses();
   const { data: selectedCourses, isLoading: selectedCoursesLoading } =
     useSelectedCourses();
-  const { selectCourses, isSelecting } = useSelectCourseMutation();
+  const { selectCourses } = useSelectCourseMutation();
   if (isLoading || selectedCoursesLoading) {
     return <div>Loading...</div>;
   }
@@ -13,7 +14,12 @@ const MultiSelect = () => {
     return <div>Error</div>;
   }
   const handleClick = (course: Course) => {
-    selectCourses(course);
+    selectCourses(course, {
+      onSuccess: (result) => {
+        console.log("success");
+        queryClient.setQueryData(["selectedCourses"], result);
+      },
+    });
   };
   return (
     <div>
