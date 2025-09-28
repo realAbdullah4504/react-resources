@@ -4,3 +4,7 @@ export * from "./useCategories";
 export * from "./useSelectedCategory";
 // eslint-disable-next-line react-refresh/only-export-components
 export * from "./useItems";
+// eslint-disable-next-line react-refresh/only-export-components
+export * from "./useCourses";
+// eslint-disable-next-line react-refresh/only-export-components
+export * from "./useSelectedCourses";

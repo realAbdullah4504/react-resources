@@ -65,13 +65,18 @@ app.get("/items/:category", (req, res) => {
 });
 
 app.get("/courses", (req, res) => {
-    res.send({ courses, selectedCourses });
+    res.send(courses);
+});
+
+app.get("/selectedCourses", (req, res) => {
+    res.send(selectedCourses);
 });
 
 app.post("/selectCourses", async (req, res) => {
-    const apiRandomNumber = Math.random() * 5;
+    const apiRandomNumber = 1;
     console.log(apiRandomNumber);
     const { course } = req.body;
+    console.log(course);
     const isSelectedCourse = selectedCourses.find((c) => c.id === course.id);
     await new Promise((resolve, reject) => setTimeout(resolve, apiRandomNumber * 1000));
     if (isSelectedCourse) {
