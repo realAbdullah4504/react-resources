@@ -51,8 +51,9 @@ app.get("/selectedCategory", (req, res) => {
 });
 
 app.post("/selectedCategory", async (req, res) => {
+    const apiRandomNumber = Math.random() * 5;
     const { category } = req.body;
-    await new Promise((resolve, reject) => setTimeout(resolve, 1000));
+    await new Promise((resolve, reject) => setTimeout(resolve, apiRandomNumber * 1000));
     selectedCategory = categories.find((c) => c.id === category.id);
     res.send(selectedCategory);
 });

@@ -1,6 +1,7 @@
 import React, {
   useEffect,
   useOptimistic,
+  useRef,
   useState,
   useTransition,
 } from "react";
@@ -14,19 +15,19 @@ const OptimisticUpdate = () => {
   const [selectedCategoryId, setSelectedCategoryId] = useState<number | null>(
     null
   );
-  const [, startTransition] = useTransition();
+  const [isPending, startTransition] = useTransition();
   const [optimisticSelectedCategoryId, setOptimisticSelectedCategoryId] =
-    useOptimistic(selectedCategoryId);
+    useOptimistic<number | null>(selectedCategoryId);
 
   useEffect(() => {
     const fetchButtons = async () => {
       const { data } = await apiHandler<{ id: number; name: string }[]>(
         `${import.meta.env.VITE_API_URL}/category`
       );
-      const { data: selectedCategory } =
-        await apiHandler<{ id: number; name: string }>(
-          `${import.meta.env.VITE_API_URL}/selectedCategory`
-        );
+      const { data: selectedCategory } = await apiHandler<{
+        id: number;
+        name: string;
+      }>(`${import.meta.env.VITE_API_URL}/selectedCategory`);
       setCategory(data || []);
       setSelectedCategoryId(selectedCategory?.id || null);
     };
@@ -35,29 +36,36 @@ const OptimisticUpdate = () => {
     });
   }, []);
 
+  const apiCount = useRef(0);
   const handleSelect = (category: { id: number; name: string }) => {
-    console.log("1. Starting outer transition");
+    if(optimisticSelectedCategoryId === category.id) return;
+    const current = ++apiCount.current;
     startTransition(async () => {
       setOptimisticSelectedCategoryId(category.id);
-      console.log("2. Making API call");
-      const { data } = await apiHandler<{ id: number; name: string }, string >(
-        `${import.meta.env.VITE_API_URL}/selectedCategory`,
-        {
-          method: "POST",
-          body: JSON.stringify({ category }) ,
+      console.log(current, apiCount.current);
+      try {
+        console.log("2. Making API call");
+        const { data } = await apiHandler<{ id: number; name: string }, string>(
+          `${import.meta.env.VITE_API_URL}/selectedCategory`,
+          {
+            method: "POST",
+            body: JSON.stringify({ category }),
+          }
+        );
+        if (current === apiCount.current) {
+          startTransition(() => {
+            setSelectedCategoryId(category.id);
+            setSearchParams({ category: data?.name || "" });
+          });
         }
-      );
-      startTransition(() => {
-        console.log("3. Updating UI");
-        setSelectedCategoryId(category.id);
-        setSearchParams({ category: data?.name || "" });
-      });
-      console.log("4. Inner transition scheduled");
+      } catch (error) {
+        console.log("Error updating UI", error);
+      }
     });
-    console.log("5. After outer transition");
   };
   return (
     <div>
+      <p>{isPending ? "Loading..." : "Loaded"}</p>
       <div
         style={{
           display: "flex",
