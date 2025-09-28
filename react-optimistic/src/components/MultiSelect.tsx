@@ -6,6 +6,7 @@ import React, {
 } from "react";
 import { apiHandler } from "../lib/handler";
 const MultiSelect = () => {
+  //use transition batches the update,like the filtering and api calls etc
   const [courses, setCourses] = useState<{ id: number; name: string }[]>([]);
   const [selectedCourses, setSelectedCourses] = useState<
     { id: number; name: string }[]
@@ -38,7 +39,7 @@ const MultiSelect = () => {
     });
   }, []);
 
-  const handleClick = async (course: { id: number; name: string }) => {
+  const handleClick = (course: { id: number; name: string }) => {
     startTransition(async () => {
       setOptimisticSelectedCourses(course);
       try {
