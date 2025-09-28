@@ -21,35 +21,39 @@ const OptimisticUpdate = () => {
 
   useEffect(() => {
     const fetchButtons = async () => {
-      const { data, error } = await apiHandler(
+      const { data } = await apiHandler<{ id: number; name: string }[]>(
         `${import.meta.env.VITE_API_URL}/category`
       );
-      const { data: selectedCategory, error: selectedCategoryError } =
-        await apiHandler(`${import.meta.env.VITE_API_URL}/selectedCategory`);
-      setCategory(data);
-      setSelectedCategoryId(selectedCategory.id);
+      const { data: selectedCategory } =
+        await apiHandler<{ id: number; name: string }>(
+          `${import.meta.env.VITE_API_URL}/selectedCategory`
+        );
+      setCategory(data || []);
+      setSelectedCategoryId(selectedCategory?.id || null);
     };
-    fetchButtons();
+    fetchButtons().catch((error) => {
+      console.error("Error fetching buttons:", error);
+    });
   }, []);
 
   const handleSelect = async (category: { id: number; name: string }) => {
     console.log("1. Starting outer transition");
-    startTransition(async () => {
+    // startTransition(async () => {
       setOptimisticSelectedCategoryId(category.id);
       console.log("2. Making API call");
-      const { data, error } = await apiHandler(
+      const { data } = await apiHandler<{ id: number; name: string }, string >(
         `${import.meta.env.VITE_API_URL}/selectedCategory`,
         {
           method: "POST",
-          body: JSON.stringify({ category }),
+          body: JSON.stringify({ category }) ,
         }
       );
-      startTransition(() => {
+      // startTransition(() => {
         console.log("3. Updating UI");
-        setSearchParams({ category: data.name });
-      });
+        setSearchParams({ category: data?.name || "" });
+      // });
       console.log("4. Inner transition scheduled");
-    });
+    // });
     console.log("5. After outer transition");
   };
   return (
