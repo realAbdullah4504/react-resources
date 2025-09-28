@@ -4,16 +4,16 @@ const Button = ({
   selectedCategory,
 }: {
   category: { id: number; name: string };
-  handleSelect: (category: { id: number; name: string }) => Promise<void>;
+  handleSelect: (category: { id: number; name: string }) => void;
   selectedCategory: boolean;
 }) => {
-  const handleClick = async (category: { id: number; name: string }) => {
-    await handleSelect(category);
+  const handleClick = (category: { id: number; name: string }) => {
+    handleSelect(category);
   };
   return (
     <button
       className="p-2 m-2 w-24 rounded card text-white"
-      onClick={() => void handleClick(category)}
+      onClick={() => handleClick(category)}
       key={category.id}
       style={{ backgroundColor: selectedCategory ? "blue" : "black" }}
     >

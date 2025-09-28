@@ -1,5 +1,4 @@
 import React, {
-  startTransition,
   useEffect,
   useOptimistic,
   useState,
@@ -10,12 +9,12 @@ import { useSearchParams } from "react-router-dom";
 import { apiHandler } from "../../lib/handler";
 
 const OptimisticUpdate = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [, setSearchParams] = useSearchParams();
   const [category, setCategory] = useState<{ id: number; name: string }[]>([]);
   const [selectedCategoryId, setSelectedCategoryId] = useState<number | null>(
     null
   );
-  const [isPending, startTransition] = useTransition();
+  const [, startTransition] = useTransition();
   const [optimisticSelectedCategoryId, setOptimisticSelectedCategoryId] =
     useOptimistic(selectedCategoryId);
 
@@ -36,9 +35,9 @@ const OptimisticUpdate = () => {
     });
   }, []);
 
-  const handleSelect = async (category: { id: number; name: string }) => {
+  const handleSelect = (category: { id: number; name: string }) => {
     console.log("1. Starting outer transition");
-    // startTransition(async () => {
+    startTransition(async () => {
       setOptimisticSelectedCategoryId(category.id);
       console.log("2. Making API call");
       const { data } = await apiHandler<{ id: number; name: string }, string >(
@@ -48,12 +47,13 @@ const OptimisticUpdate = () => {
           body: JSON.stringify({ category }) ,
         }
       );
-      // startTransition(() => {
+      startTransition(() => {
         console.log("3. Updating UI");
+        setSelectedCategoryId(category.id);
         setSearchParams({ category: data?.name || "" });
-      // });
+      });
       console.log("4. Inner transition scheduled");
-    // });
+    });
     console.log("5. After outer transition");
   };
   return (

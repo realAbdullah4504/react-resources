@@ -1,4 +1,4 @@
-type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
+type HttpMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
 
 type RequestConfig<TBody = unknown> = {
   method?: HttpMethod;
@@ -15,35 +15,32 @@ type ApiResponse<T = unknown> = {
   status: number | null;
 };
 
-export const apiHandler = async <
-  TResponse = unknown,
-  TBody = undefined
->(
+export const apiHandler = async <TResponse = unknown, TBody = undefined>(
   endpoint: string,
-  config: RequestConfig<TBody> = { method: 'GET' }
+  config: RequestConfig<TBody> = { method: "GET" }
 ): Promise<ApiResponse<TResponse>> => {
   const defaultHeaders: Record<string, string> = {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   };
 
   const requestConfig: RequestInit = {
-    method: config.method || 'GET',
+    method: config.method || "GET",
     headers: {
       ...defaultHeaders,
       ...(config.headers || {}),
     },
-    credentials: config.credentials || 'same-origin',
-    mode: config.mode || 'cors',
-    cache: config.cache || 'default',
+    credentials: config.credentials || "same-origin",
+    mode: config.mode || "cors",
+    cache: config.cache || "default",
   };
 
   // Only include body for methods that support it
   if (
     config.body !== undefined &&
-    !['GET', 'HEAD'].includes(config.method || 'GET')
+    !["GET", "HEAD"].includes(config.method || "GET")
   ) {
     requestConfig.body =
-      typeof config.body === 'string'
+      typeof config.body === "string"
         ? config.body
         : JSON.stringify(config.body);
   }
@@ -52,10 +49,11 @@ export const apiHandler = async <
     const response = await fetch(endpoint, requestConfig);
 
     if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
+      const errorData = (await response.json().catch(() => ({}))) as {
+        message: string;
+      };
       throw new Error(
-        (errorData as { message?: string }).message ||
-          `HTTP error! status: ${response.status}`
+        errorData.message || `HTTP error! status: ${response.status}`
       );
     }
 
@@ -72,11 +70,11 @@ export const apiHandler = async <
       status: response.status,
     };
   } catch (error) {
-    console.error('API call failed:', error);
+    console.error("API call failed:", error);
     return {
       data: null,
       error:
-        error instanceof Error ? error : new Error('An unknown error occurred'),
+        error instanceof Error ? error : new Error("An unknown error occurred"),
       status: null,
     };
   }
