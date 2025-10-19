@@ -1,3 +1,4 @@
+import { supabase } from '@/lib/supabaseClient';
 import type { Submission } from '@/types';
 
 let mockSubmissions: Submission[] = [
@@ -110,6 +111,8 @@ let mockSubmissions: Submission[] = [
 
 export const submissionService = {
   getSubmissions: async (): Promise<Submission[]> => {
+    const { data: submissions, error } = await supabase.from('submissions').select('*');
+    if (error) throw error;
     await new Promise(resolve => setTimeout(resolve, 300));
     return [...mockSubmissions].sort((a, b) =>
       new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
