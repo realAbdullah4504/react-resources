@@ -1,11 +1,26 @@
-import { Navigate, useLocation } from "react-router-dom";
+import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { Loader2 } from "lucide-react";
 import { hasPermission } from "@/config/roles";
-import { getAllowedRolesForPath } from "@/config/routeRoles";
-import type { UserRole, ProtectedRouteProps } from "@/types";
+import { getAllowedRolesForPath } from "@/config/rolesConfig";
+import type { UserRole } from "@/types";
 
-export const ProtectedRoute = ({
+export interface ProtectedRouteProps {
+  /**
+   * Optional: Explicitly specify allowed roles for this route
+   * If not provided, will try to determine from route configuration
+   */
+  allowedRoles?: UserRole[];
+
+  /**
+   * Optional: Set to true to skip role checking (only check authentication)
+   */
+  public?: boolean;
+
+  children?: React.ReactNode;
+}
+
+const ProtectedRoute = ({
   allowedRoles,
   public: isPublic = false,
   children,
@@ -16,9 +31,9 @@ export const ProtectedRoute = ({
 
   // Get allowed roles from route config if not explicitly provided
   const routeAllowedRoles = isPublic
-  ? undefined
-  : allowedRoles || getAllowedRolesForPath(path);
-  
+    ? undefined
+    : allowedRoles || getAllowedRolesForPath(path);
+
   // Show loading state
   if (isLoading) {
     return (
@@ -56,3 +71,5 @@ export const ProtectedRoute = ({
 
   return children;
 };
+
+export default ProtectedRoute;

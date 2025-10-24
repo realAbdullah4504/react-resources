@@ -1,10 +1,14 @@
 import type { RouteObject } from "react-router-dom";
-import { ProtectedRoute } from "@/components/guards/ProtectedRoute";
 import { DashboardLayout } from "@/components/layouts";
-import { AdminPage } from "@/pages/dashboard";
-import Users from "@/pages/dashboard/admin/Users";
-import Settings from "@/pages/dashboard/admin/Settings";
-import { Navigate } from "react-router-dom";
+import {
+  AdminDashboard,
+  AdminSubmissions,
+  AdminSettings,
+  Users,
+  TeacherPage,
+  SecretaryPage,
+} from "@/pages/dashboard";
+import { ProtectedRoute, RootRedirect } from "@/components/guards";
 
 export const privateRoutes: RouteObject[] = [
   {
@@ -16,33 +20,34 @@ export const privateRoutes: RouteObject[] = [
     ),
     children: [
       // Admin Routes
-      { index: true, element: <Navigate to="admin" replace /> },
+      { index: true, element: <RootRedirect /> },
       {
         path: "admin",
         children: [
-          { index: true, element: <AdminPage /> },
+          { index: true, element: <AdminDashboard /> },
           { path: "users", element: <Users /> },
-          { path: "settings", element: <Settings /> },
+          { path: "settings", element: <AdminSettings /> },
+          { path: "submissions", element: <AdminSubmissions /> },
         ],
       },
       // Teacher Routes
-      // {
-      //   path: "teacher",
-      //   children: [
-      //     { index: true, element: <TeacherPage /> },
-      //     { path: "classes", element: <TeacherClassesPage /> },
-      //     { path: "attendance", element: <TeacherAttendancePage /> },
-      //   ],
-      // },
-      // // Secretary Routes
-      // {
-      //   path: "secretary",
-      //   children: [
-      //     { index: true, element: <SecretaryPage /> },
-      //     { path: "reports", element: <SecretaryReportsPage /> },
-      //     { path: "documents", element: <SecretaryDocumentsPage /> },
-      //   ],
-      // },
+      {
+        path: "teacher",
+        children: [
+          { index: true, element: <TeacherPage /> },
+          // { path: "classes", element: <TeacherClassesPage /> },
+          // { path: "attendance", element: <TeacherAttendancePage /> },
+        ],
+      },
+      // Secretary Routes
+      {
+        path: "secretary",
+        children: [
+          { index: true, element: <SecretaryPage /> },
+          // { path: "reports", element: <SecretaryReportsPage /> },
+          // { path: "documents", element: <SecretaryDocumentsPage /> },
+        ],
+      },
       // // Principal Routes
       // {
       //   path: "principal",

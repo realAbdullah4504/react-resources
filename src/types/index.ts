@@ -1,6 +1,6 @@
 /**
  * Types index - Central export point
- * 
+ *
  * Organized by concern:
  * - domain: Business entities and domain models
  * - api: API request/response types
@@ -10,17 +10,17 @@
  */
 
 // Domain types (business entities)
-export * from './domain';
+export * from "./domain";
 
 // API types (request/response)
-export * from './api';
-
-// UI types (components, navigation)
-export * from './ui';
+export * from "./api";
 
 // Configuration types
-export * from './config';
+export * from "./config";
+
+// Form types
+export * from "./forms";
 
 // Store types (state management)
-export * from './store';
+export * from "./store";
 

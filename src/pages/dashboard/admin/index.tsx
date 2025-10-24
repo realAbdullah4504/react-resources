@@ -1,13 +1,5 @@
-import { useSubmissions } from "@/hooks/useSubmissions";
+export {default as AdminDashboard} from "./DashboardPage";
+export {default as AdminSettings} from "./SettingsPage";
+export {default as Users} from "./UsersPage";
+export {default as AdminSubmissions} from "./SubmissionsPage";
 
-const AdminPage = () => {
-  const {submissions}=useSubmissions()
-  return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4">Admin Dashboard</h1>
-      <p>Welcome to your dashboard!</p>
-    </div>
-  );
-};
-
-export default AdminPage;
