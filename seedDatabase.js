@@ -63,7 +63,7 @@ async function seed() {
     {
       user_email: 'abdullahjaved4504@gmail.com',
       name: 'Bob Project',
-      description: 'Project owned by Abdullah 2',
+      description: 'Project owned by Abdullah 4504',
     },
   ];
 
