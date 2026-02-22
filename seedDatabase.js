@@ -7,7 +7,7 @@ const supabase = createClient(supabaseUrl, supabaseServiceRoleKey);
 
 async function seed() {
   const emails = [
-    'abdullahjaved1@live.com',
+    'abdullahjavaid1@live.com',
     'abdullahjaved4504@gmail.com',
     'abdullah.jstechsol@gmail.com',
   ];
@@ -37,7 +37,7 @@ async function seed() {
     const { data, error } = await supabase.from('profiles').insert({
       id: user.id, // must match auth user ID
       full_name:
-        user.email === 'abdullahjaved1@live.com'
+        user.email === 'abdullahjavaid1@live.com'
           ? 'Abdullah live'
           : user.email === 'abdullahjaved4504@gmail.com'
           ? 'Abdullah gmail'
@@ -52,7 +52,7 @@ async function seed() {
   console.log('Seeding projects...');
   const projects = [
     {
-      user_email: 'abdullahjaved1@live.com',
+      user_email: 'abdullahjavaid1@live.com',
       name: 'Alice Project',
       description: 'Project owned by Abdullah 1',
     },
