@@ -1,6 +1,3 @@
--- Enable UUID extension
-create extension if not exists "uuid-ossp";
-
 -- =========================
 -- PROFILES TABLE
 -- =========================
@@ -15,7 +12,7 @@ create table public.profiles (
 -- PROJECTS TABLE
 -- =========================
 create table public.projects (
-  id uuid primary key default uuid_generate_v4(),
+  id uuid primary key default gen_random_uuid(),
   user_id uuid references public.profiles(id) on delete cascade,
   name text not null,
   description text,
@@ -26,7 +23,7 @@ create table public.projects (
 -- TASKS TABLE
 -- =========================
 create table public.tasks (
-  id uuid primary key default uuid_generate_v4(),
+  id uuid primary key default gen_random_uuid(),
   project_id uuid references public.projects(id) on delete cascade,
   title text not null,
   completed boolean default false,
