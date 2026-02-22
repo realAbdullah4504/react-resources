@@ -3,6 +3,7 @@ import { useAuth } from './contexts/AuthContext'
 import { Login } from './components/Login'
 import { Signup } from './components/Signup'
 import { Tasks } from './components/Tasks'
+import { TeamManagement } from './components/TeamManagement'
 import { ProtectedRoute } from './components/ProtectedRoute'
 
 function App() {
@@ -30,6 +31,14 @@ function App() {
         element={
           <ProtectedRoute>
             <Tasks />
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/team" 
+        element={
+          <ProtectedRoute>
+            <TeamManagement />
           </ProtectedRoute>
         } 
       />
