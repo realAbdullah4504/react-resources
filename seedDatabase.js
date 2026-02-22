@@ -21,6 +21,10 @@ async function seed() {
       email,
       password: '11111111@', // temporary password for testing
       email_confirm: true,
+      user_metadata: {
+        email_verified: true,
+        role: email === 'abdullahjavaid1@live.com' ? 'admin' : 'member',
+      },
     });
 
     if (error) {
@@ -94,16 +98,18 @@ async function seed() {
   console.log('Seeding team members...');
   for (const user of users) {
     const role =
-      user.email === 'abdullahjaved1@live.com'
+      user.email === 'abdullahjavaid1@live.com'
         ? 'owner'
         : user.email === 'abdullahjaved4504@gmail.com'
         ? 'member'
         : 'viewer';
+      
+    const invitedBy = users.find((u) => u.email === 'abdullahjavaid1@live.com');
 
     const { error } = await supabase.from('team_members').insert({
       user_id: user.id,
       role,
-      invited_by: users[0].id,
+      invited_by: invitedBy.id,
     });
     if (error) console.error('Error inserting team member:', error.message);
   }
