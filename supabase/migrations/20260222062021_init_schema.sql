@@ -8,7 +8,6 @@ create table public.profiles (
   id uuid primary key references auth.users(id) on delete cascade,
   full_name text,
   avatar_url text,
-  role text default 'member',
   created_at timestamp with time zone default now()
 );
 
@@ -61,7 +60,7 @@ on public.profiles
 for select
 using (
     auth.uid() = id  -- normal user sees their own row
-    OR (select role from public.profiles where id = auth.uid()) = 'admin'
+    or auth.jwt() ->> 'user_metadata' ->> 'role' = 'admin'
 );
 
 -- Projects RLS

@@ -50,6 +50,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       options: {
         data: {
           full_name: fullName,
+          role: role  // Store role in user_metadata for JWT access
         }
       }
     })
