@@ -8,6 +8,7 @@ create table public.profiles (
   id uuid primary key references auth.users(id) on delete cascade,
   full_name text,
   avatar_url text,
+  role text default 'member',
   created_at timestamp with time zone default now()
 );
 
@@ -55,13 +56,13 @@ on public.profiles
 for insert
 with check ( auth.uid() = id );
 
-create policy "Users can view their own profile or admin can view all"
+create policy "Admins can view all profiles via profile table"
 on public.profiles
 for select
 using (
-  auth.uid() = id OR auth.role() = 'admin'
+    auth.uid() = id  -- normal user sees their own row
+    OR (select role from public.profiles where id = auth.uid()) = 'admin'
 );
-
 
 -- Projects RLS
 create policy "Users can manage their own projects"

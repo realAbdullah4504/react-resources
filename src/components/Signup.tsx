@@ -6,6 +6,7 @@ export const Signup: React.FC = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [fullName, setFullName] = useState('')
+  const [role, setRole] = useState<'member' | 'admin'>('member')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState(false)
@@ -18,7 +19,7 @@ export const Signup: React.FC = () => {
     setLoading(true)
     setError(null)
 
-    const { error } = await signUp(email, password, fullName)
+    const { error } = await signUp(email, password, fullName, role)
     
     if (error) {
       setError(error.message)
@@ -64,6 +65,27 @@ export const Signup: React.FC = () => {
               boxSizing: 'border-box'
             }}
           />
+        </div>
+
+        <div style={{ marginBottom: '15px' }}>
+          <label htmlFor="role" style={{ display: 'block', marginBottom: '5px' }}>
+            Role:
+          </label>
+          <select
+            id="role"
+            value={role}
+            onChange={(e) => setRole(e.target.value as 'member' | 'admin')}
+            style={{ 
+              width: '100%', 
+              padding: '8px', 
+              border: '1px solid #ddd', 
+              borderRadius: '4px',
+              boxSizing: 'border-box'
+            }}
+          >
+            <option value="member">Member</option>
+            <option value="admin">Admin</option>
+          </select>
         </div>
         
         <div style={{ marginBottom: '15px' }}>
