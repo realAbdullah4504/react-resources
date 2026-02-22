@@ -66,7 +66,3 @@ comment on table public.team_invitations is 'Invitations for users to join teams
 comment on column public.team_invitations.status is 'Status of the invitation (pending, accepted, rejected, expired)';
 comment on column public.team_invitations.token is 'Unique token for invitation acceptance';
 comment on column public.team_invitations.expires_at is 'When the invitation expires';
-
-comment on table public.team_projects is 'Many-to-many relationship between teams and projects';
-comment on column public.team_projects.team_id is 'Reference to the team';
-comment on column public.team_projects.project_id is 'Reference to the project';
