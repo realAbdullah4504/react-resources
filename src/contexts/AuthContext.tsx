@@ -66,7 +66,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         .insert({
           id: data.user.id,
           full_name: fullName,
-          role: role
         })
       
       return { error: profileError }

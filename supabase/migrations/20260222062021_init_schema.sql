@@ -59,10 +59,9 @@ create policy "Admins can view all profiles via profile table"
 on public.profiles
 for select
 using (
-    auth.uid() = id  -- normal user sees their own row
-    or auth.jwt() ->> 'user_metadata' ->> 'role' = 'admin'
+    auth.uid() = id
+    OR (auth.jwt()::jsonb -> 'user_metadata' ->> 'role') = 'admin'
 );
-
 -- Projects RLS
 create policy "Users can manage their own projects"
 on public.projects
