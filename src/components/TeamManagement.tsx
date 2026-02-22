@@ -34,9 +34,7 @@ export const TeamManagement: React.FC = () => {
         .from('team_members')
         .select(`
           *,
-          profiles (
-            full_name
-          )
+          profiles(full_name)
         `)
         .order('joined_at', { ascending: false })
       
