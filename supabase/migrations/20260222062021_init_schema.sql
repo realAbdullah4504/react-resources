@@ -9,6 +9,18 @@ create table public.profiles (
 );
 
 -- =========================
+-- TEAM MEMBERS TABLE
+-- =========================
+create table public.team_members (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid references public.profiles(id) on delete cascade,
+  invited_by uuid references public.profiles(id) on delete set null,
+  role text not null check (role in ('owner', 'admin', 'member', 'viewer')),
+  joined_at timestamp with time zone default now(),
+  unique(user_id)
+);
+
+-- =========================
 -- PROJECTS TABLE
 -- =========================
 create table public.projects (
@@ -60,22 +72,39 @@ using (
     OR (auth.jwt()::jsonb -> 'user_metadata' ->> 'role') = 'admin'
 );
 -- Projects RLS
-create policy "Users can manage their own projects"
+create policy "Owner and invited users can access projects"
 on public.projects
 for all
-using ( auth.uid() = user_id );
+using (
+  auth.uid() = user_id
+  OR exists (
+    select 1
+    from public.team_members tm
+    where tm.user_id = auth.uid()
+      and tm.invited_by = projects.user_id
+  )
+);
 
 -- Tasks RLS
 create policy "Users can manage tasks of their projects"
 on public.tasks
 for all
 using (
-  auth.uid() in (
-    select user_id from public.projects
-    where id = project_id
+  exists (
+    select 1
+    from public.projects p
+    where p.id = tasks.project_id
+      and (
+        p.user_id = auth.uid()
+        OR exists (
+          select 1
+          from public.team_members tm
+          where tm.user_id = auth.uid()
+            and tm.invited_by = p.user_id
+        )
+      )
   )
 );
-
 -- Storage buckets
 insert into storage.buckets (id, name, public)
 values ('avatars', 'avatars', true);

@@ -340,6 +340,19 @@ USING (
 
 ## RLS Functions and Operators
 
+#### Options
+
+- USING
+- WITH CHECK
+- EXISTS
+- IN
+- ANY
+- ALL
+- auth.uid()
+- auth.jwt()
+- How PostgreSQL evaluates RLS
+
+
 ### Authentication Functions
 
 ```sql

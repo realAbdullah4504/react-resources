@@ -31,7 +31,6 @@ async function seed() {
       console.error('Error creating user:', email, error.message);
       continue;
     }
-    console.log('User data:', user.user);
     console.log('Created user:', user.user.id, email);
     users.push(user.user);
   }
@@ -67,14 +66,16 @@ async function seed() {
     },
   ];
 
+  const projectsData = [];
   for (const p of projects) {
     const user = users.find((u) => u.email === p.user_email);
-    const { error } = await supabase.from('projects').insert({
+    const { data, error } = await supabase.from('projects').insert({
       id: p.id,
       user_id: user.id,
       name: p.name,
       description: p.description,
-    });
+    }).select('*');
+    if (data) projectsData.push(...data);
     if (error) console.error('Error inserting project:', error.message);
   }
 
@@ -84,9 +85,8 @@ async function seed() {
     { projectName: 'Alice Project', title: 'Test invites', completed: true },
     { projectName: 'Bob Project', title: 'Write docs', completed: false },
   ];
-
   for (const t of tasks) {
-    const project = projects.find((p) => p.name === t.projectName);
+    const project = projectsData.find((p) => p.name === t.projectName);
     const { error } = await supabase.from('tasks').insert({
       project_id: project.id,
       title: t.title,
