@@ -89,7 +89,7 @@ with check (auth.uid() = user_id);
 -- Tasks RLS
 create policy "Users can manage tasks of their projects"
 on public.tasks
-for all
+for select,insert,update
 using (
   exists (
     select 1 from
