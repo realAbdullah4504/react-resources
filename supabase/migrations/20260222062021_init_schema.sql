@@ -91,18 +91,18 @@ on public.tasks
 for all
 using (
   exists (
-    select 1
-    from public.projects p
-    where p.id = tasks.project_id
-      and (
-        p.user_id = auth.uid()
-        OR exists (
-          select 1
-          from public.team_members tm
-          where tm.user_id = auth.uid()
-            and tm.invited_by = p.user_id
-        )
+    select 1 from
+    public.projects p
+    where p.id = project_id
+    and (
+      p.user_id = auth.uid()
+      OR exists (
+        select 1
+        from public.team_members tm
+        where tm.user_id = auth.uid()
+          and tm.invited_by = p.user_id
       )
+    )
   )
 );
 -- Storage buckets
