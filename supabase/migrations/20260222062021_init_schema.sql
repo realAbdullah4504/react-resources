@@ -45,6 +45,7 @@ create table public.tasks (
 alter table public.profiles enable row level security;
 alter table public.projects enable row level security;
 alter table public.tasks enable row level security;
+alter table public.team_members enable row level security;
 
 -- RLS Policies
 
@@ -69,8 +70,14 @@ on public.profiles
 for select
 using (
     auth.uid() = id
-    OR (auth.jwt()::jsonb -> 'user_metadata' ->> 'role') = 'admin'
 );
+
+-- Team members RLS
+create policy "Users can view their own team members"
+on public.team_members
+for all
+using ( auth.uid() = invited_by );
+
 -- Projects RLS
 create policy "Owner and invited users can access projects"
 on public.projects

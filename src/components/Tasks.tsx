@@ -18,6 +18,13 @@ interface Project {
   created_at: string
 }
 
+interface Profile {
+  id: string
+  full_name: string | null
+  avatar_url: string | null
+  created_at: string
+}
+
 export const Tasks: React.FC = () => {
   const [newTaskTitle, setNewTaskTitle] = useState('')
   const [selectedProject, setSelectedProject] = useState<string>('')
@@ -28,6 +35,23 @@ export const Tasks: React.FC = () => {
   const { user, signOut } = useAuth()
   const navigate = useNavigate()
   const queryClient = useQueryClient()
+
+  // Fetch user profile
+  const { data: profile } = useQuery({
+    queryKey: ['profile', user?.id],
+    queryFn: async () => {
+      if (!user?.id) return null
+      const { data, error } = await supabase
+        .from('profiles')
+        .select('full_name, avatar_url')
+        .eq('id', user.id)
+        .single()
+      
+      if (error && error.code !== 'PGRST116') throw error
+      return data as Profile
+    },
+    enabled: !!user
+  })
 
   // Fetch projects
   const { data: projects, isLoading: projectsLoading } = useQuery({
@@ -168,6 +192,38 @@ export const Tasks: React.FC = () => {
 
   return (
     <div style={{ maxWidth: '800px', margin: '0 auto', padding: '20px' }}>
+      {/* Profile Section */}
+      <div style={{ 
+        backgroundColor: '#f8f9fa', 
+        padding: '20px', 
+        borderRadius: '8px', 
+        marginBottom: '30px',
+        border: '1px solid #e9ecef'
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+          <div style={{
+            width: '50px',
+            height: '50px',
+            borderRadius: '50%',
+            backgroundColor: '#007bff',
+            color: 'white',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: '20px',
+            fontWeight: 'bold'
+          }}>
+            {profile?.full_name || user.email?.charAt(0).toUpperCase() || 'U'}
+          </div>
+          <div style={{ flex: 1 }}>
+            <h3 style={{ margin: '0 0 5px 0', color: '#333' }}>Welcome back, {profile?.full_name || 'User'}!</h3>
+            <p style={{ margin: 0, color: '#666', fontSize: '14px' }}>
+              {user.email}
+            </p>
+          </div>
+        </div>
+      </div>
+
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px' }}>
         <h1>Tasks</h1>
         <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>

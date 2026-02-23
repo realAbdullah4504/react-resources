@@ -37,7 +37,7 @@ export const TeamManagement: React.FC = () => {
           profiles!team_members_user_id_fkey(full_name)
         `)
         .order('joined_at', { ascending: false })
-      
+      console.log(data)
       if (error) throw error
       return data as TeamMember[]
     },
