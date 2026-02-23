@@ -87,9 +87,9 @@ using (
 with check (auth.uid() = user_id);
 
 -- Tasks RLS
-create policy "Users can manage tasks of their projects"
+create policy "Users can Read tasks of their projects"
 on public.tasks
-for select,insert,update
+for select
 using (
   exists (
     select 1 from
@@ -106,6 +106,39 @@ using (
     )
   )
 );
+
+create policy "Users can insert tasks in their own projects"
+on public.tasks
+for insert
+with check (
+  exists (
+    select 1 from
+    public.projects p
+    where p.id = project_id
+    and ( 
+      p.user_id = auth.uid()
+      OR exists (
+        select 1
+        from public.team_members tm
+        where tm.user_id = auth.uid()
+          and tm.invited_by = p.user_id
+      )
+    )
+  )
+);
+
+create policy "Users can delete their own tasks "
+on public.tasks
+for delete
+using ( 
+  exists (
+    select 1 from
+    public.projects p
+    where p.id = project_id
+    and p.user_id = auth.uid()
+  )
+);
+
 -- Storage buckets
 insert into storage.buckets (id, name, public)
 values ('avatars', 'avatars', true);
