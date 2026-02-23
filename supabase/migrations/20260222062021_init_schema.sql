@@ -53,7 +53,14 @@ alter table public.team_members enable row level security;
 create policy "Users can view their own profile"
 on public.profiles
 for select
-using ( auth.uid() = id );
+using ( 
+  auth.uid() = id
+  OR exists (
+    select 1
+    from public.team_members tm
+    where tm.invited_by = auth.uid()
+  )   
+  );
 
 create policy "Users can update their own profile"
 on public.profiles
