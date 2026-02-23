@@ -66,7 +66,7 @@ export const Tasks: React.FC = () => {
 
   // Create project mutation
   const createProjectMutation = useMutation({
-    mutationFn: async (projectData: { name: string; description: string }) => {
+    mutationFn: async (projectData: { name: string; description: string; user_id: string }) => {
       const { data, error } = await supabase
         .from('projects')
         .insert(projectData)
@@ -140,6 +140,7 @@ export const Tasks: React.FC = () => {
     if (newProjectName.trim()) {
       createProjectMutation.mutate({
         name: newProjectName,
+        user_id: user!.id,
         description: newProjectDescription
       })
     }

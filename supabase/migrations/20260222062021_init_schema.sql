@@ -83,7 +83,8 @@ using (
     where tm.user_id = auth.uid()
       and tm.invited_by = projects.user_id
   )
-);
+)
+with check (auth.uid() = user_id);
 
 -- Tasks RLS
 create policy "Users can manage tasks of their projects"
