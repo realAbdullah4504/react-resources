@@ -42,6 +42,9 @@ create table public.tasks (
   created_at timestamp with time zone default now()
 );
 
+-- =========================
+-- RLS POLICIES
+-- =========================
 alter table public.profiles enable row level security;
 alter table public.projects enable row level security;
 alter table public.tasks enable row level security;
@@ -80,10 +83,46 @@ using (
 );
 
 -- Team members RLS
-create policy "Users can view their own team members"
+create policy "Admins can manage all team members"
 on public.team_members
 for all
-using ( auth.uid() = invited_by );
+using (
+  auth.uid() = invited_by
+);
+
+-- Members can only read team members
+create or replace function public.can_read_team_member(row_invited_by uuid)
+returns boolean
+language plpgsql
+security definer
+set search_path = public
+as $$
+declare
+  current_user_invited_by uuid;
+begin
+  -- Get invited_by of logged-in user
+  select invited_by
+  into current_user_invited_by
+  from public.team_members
+  where user_id = auth.uid();
+
+  -- If no record, deny
+  if current_user_invited_by is null then
+    return false;
+  end if;
+
+  -- Allow if same invited_by
+  return current_user_invited_by = row_invited_by;
+end;
+$$;
+
+-- Members can only read team members
+create policy "Members can read team members"
+on public.team_members
+for select
+using (
+  public.can_read_team_member(invited_by)
+);
 
 -- Projects RLS
 create policy "Owner and invited users can access projects"
