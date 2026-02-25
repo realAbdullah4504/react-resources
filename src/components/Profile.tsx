@@ -75,14 +75,14 @@ export const Profile: React.FC = () => {
 
       if (uploadError) throw uploadError
 
-      // // Get the public URL
-      // const { data: { publicUrl } } = supabase.storage
-      //   .from('avatars')
-      //   .getPublicUrl(filePath)
+      // Get the public URL
+      const { data: { publicUrl } } = supabase.storage
+        .from('avatars')
+        .getPublicUrl(filePath)
 
       // Update the profile with the new avatar URL
-      // await updateProfileMutation.mutateAsync({ avatar_url: publicUrl })
-      // setAvatarUrl(publicUrl)
+      await updateProfileMutation.mutateAsync({ avatar_url: publicUrl })
+      setAvatarUrl(publicUrl)
 
     } catch (error) {
       console.error('Error uploading avatar:', error)
