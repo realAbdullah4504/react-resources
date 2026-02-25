@@ -209,3 +209,8 @@ create policy "Users can read avatars"
 on storage.objects
 for select
 using ( bucket_id = 'avatars' );
+
+create policy "Users can delete avatars"
+on storage.objects
+for delete
+using ( bucket_id = 'avatars' );
