@@ -4,6 +4,7 @@ import { Login } from './components/Login'
 import { Signup } from './components/Signup'
 import { Tasks } from './components/Tasks'
 import { TeamManagement } from './components/TeamManagement'
+import { Profile } from './components/Profile'
 import { ProtectedRoute } from './components/ProtectedRoute'
 
 function App() {
@@ -39,6 +40,14 @@ function App() {
         element={
           <ProtectedRoute>
             <TeamManagement />
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/profile" 
+        element={
+          <ProtectedRoute>
+            <Profile />
           </ProtectedRoute>
         } 
       />

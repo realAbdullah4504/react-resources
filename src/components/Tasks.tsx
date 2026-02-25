@@ -241,6 +241,19 @@ export const Tasks: React.FC = () => {
             Team Management
           </button>
           <button
+            onClick={() => navigate('/profile')}
+            style={{
+              padding: '8px 16px',
+              backgroundColor: '#007bff',
+              color: 'white',
+              border: 'none',
+              borderRadius: '4px',
+              cursor: 'pointer'
+            }}
+          >
+            Profile
+          </button>
+          <button
             onClick={handleSignOut}
             style={{
               padding: '8px 16px',
