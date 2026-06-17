@@ -1,15 +1,33 @@
-import React, { Suspense } from "react";
-
+import React from "react";
+import { login, getUser, logout } from "./auth";
 const Products = React.lazy(() => import("products/Products"));
 
 export default function App() {
-  return (
-    <>
-      <h1>Host Application</h1>
+  const user = getUser();
 
-      <Suspense fallback={<p>Loading...</p>}>
-        <Products />
-      </Suspense>
-    </>
+  return (
+    <div>
+      <h1>Host App</h1>
+
+      {!user ? (
+        <button
+          onClick={() =>
+            login({
+              id: "1",
+              name: "Abdullah",
+              token: "abc123",
+            })
+          }
+        >
+          Login
+        </button>
+      ) : (
+        <>
+          <p>Welcome {user.name}</p>
+          <button onClick={logout}>Logout</button>
+          <Products/>
+        </>
+      )}
+    </div>
   );
 }

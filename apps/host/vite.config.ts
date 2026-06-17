@@ -6,18 +6,21 @@ export default defineConfig({
   plugins: [
     federation({
       name: "host",
+      exposes: {
+        "./auth": "./src/auth.ts",
+      },
       remotes: {
         products: {
           type: "module",
           name: "products",
-          entry: "https://products-azure-five.vercel.app/remoteEntry.js",
+          entry: "http://localhost:3001/remoteEntry.js",
           entryGlobalName: "products",
           shareScope: "default",
         },
         cart: {
           type: "module",
           name: "cart",
-          entry: "https://cart-beryl-two.vercel.app/remoteEntry.js",
+          entry: "http://localhost:3002/remoteEntry.js",
           entryGlobalName: "cart",
           shareScope: "default",
         },
