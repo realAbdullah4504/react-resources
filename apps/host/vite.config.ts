@@ -10,14 +10,14 @@ export default defineConfig({
         products: {
           type: "module",
           name: "products",
-          entry: "http://localhost:3001/remoteEntry.js",
+          entry: "https://products-azure-five.vercel.app/remoteEntry.js",
           entryGlobalName: "products",
           shareScope: "default",
         },
         cart: {
           type: "module",
           name: "cart",
-          entry: "http://localhost:3002/remoteEntry.js",
+          entry: "https://cart-beryl-two.vercel.app/remoteEntry.js",
           entryGlobalName: "cart",
           shareScope: "default",
         },

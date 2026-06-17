@@ -1,10 +1,10 @@
 {
   "latestErrorEvent": {
     "code": "TYPE-001",
-    "message": "Failed to generate type declaration. Execute the below cmd to reproduce and fix the error. #TYPE-001\nargs: {\"cmd\":\"npx tsc --project D:\\\\vs_projects\\\\boilerPlates\\\\MERN-boilerplate\\\\react-resources\\\\apps\\\\cart\\\\node_modules\\\\.federation\\\\tsconfig.15c5c816cd558a34f9825fa9c4fa6611.json\"}\nView the docs to see how to solve: https://module-federation.io/guide/troubleshooting/type#type-001",
+    "message": "Failed to generate type declaration. Execute the below cmd to reproduce and fix the error. #TYPE-001\nargs: {\"cmd\":\"npx tsc --project D:\\\\vs_projects\\\\boilerPlates\\\\MERN-boilerplate\\\\react-resources\\\\apps\\\\cart\\\\node_modules\\\\.federation\\\\tsconfig.5b7d5c9f285e801b9f2e12266de5be3d.json\"}\nView the docs to see how to solve: https://module-federation.io/guide/troubleshooting/type#type-001",
     "args": {
-      "cmd": "npx tsc --project D:\\vs_projects\\boilerPlates\\MERN-boilerplate\\react-resources\\apps\\cart\\node_modules\\.federation\\tsconfig.15c5c816cd558a34f9825fa9c4fa6611.json"
+      "cmd": "npx tsc --project D:\\vs_projects\\boilerPlates\\MERN-boilerplate\\react-resources\\apps\\cart\\node_modules\\.federation\\tsconfig.5b7d5c9f285e801b9f2e12266de5be3d.json"
     },
-    "timestamp": 1781676546295
+    "timestamp": 1781676828949
   }
 }
