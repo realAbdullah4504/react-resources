@@ -1,7 +1,13 @@
+import Navbar from "./components/Navbar";
+
 export default function App() {
   return (
     <div>
-      <h1 className="text-3xl font-bold underline">Host App</h1>
+      <div className="bg-[url('src/assets/background-hero.png')] bg-cover h-screen px-25">
+      <div className="max-w-360 mx-auto">
+        <Navbar />
+      </div>
+      </div>
     </div>
   );
 }
