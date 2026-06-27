@@ -1,10 +1,10 @@
 {
   "latestErrorEvent": {
     "code": "TYPE-001",
-    "message": "Failed to generate type declaration. Execute the below cmd to reproduce and fix the error. #TYPE-001\nargs: {\"cmd\":\"npx tsc --project D:\\\\vs_projects\\\\boilerPlates\\\\MERN-boilerplate\\\\react-resources\\\\apps\\\\products\\\\node_modules\\\\.federation\\\\tsconfig.0936b87df8a494ec291a2308b5f5773c.json\"}\nView the docs to see how to solve: https://module-federation.io/guide/troubleshooting/type#type-001",
+    "message": "Failed to generate type declaration. Execute the below cmd to reproduce and fix the error. #TYPE-001\nargs: {\"cmd\":\"npx tsc --project D:\\\\vs_projects\\\\boilerPlates\\\\MERN-boilerplate\\\\react-resources\\\\apps\\\\products\\\\node_modules\\\\.federation\\\\tsconfig.831c6dfad62479e52a382d5b5cec40fd.json\"}\nView the docs to see how to solve: https://module-federation.io/guide/troubleshooting/type#type-001",
     "args": {
-      "cmd": "npx tsc --project D:\\vs_projects\\boilerPlates\\MERN-boilerplate\\react-resources\\apps\\products\\node_modules\\.federation\\tsconfig.0936b87df8a494ec291a2308b5f5773c.json"
+      "cmd": "npx tsc --project D:\\vs_projects\\boilerPlates\\MERN-boilerplate\\react-resources\\apps\\products\\node_modules\\.federation\\tsconfig.831c6dfad62479e52a382d5b5cec40fd.json"
     },
-    "timestamp": 1781676758605
+    "timestamp": 1782558784246
   }
 }
