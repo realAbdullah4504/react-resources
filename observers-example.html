@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ResizeObserver vs MutationObserver</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            padding: 30px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin-right: 10px;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+
+        .box {
+            width: 300px;
+            min-height: 120px;
+            border: 3px solid steelblue;
+            padding: 20px;
+            transition: .3s;
+            overflow: hidden;
+        }
+
+        .item {
+            padding: 8px;
+            margin: 5px 0;
+            background: #eee;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>ResizeObserver & MutationObserver Demo</h2>
+
+    <br>
+
+    <button id="add">
+        Add Content
+    </button>
+
+    <button id="remove">
+        Remove Content
+    </button>
+
+    <button id="toggleWidth">
+        Toggle Width
+    </button>
+
+    <hr><br>
+
+    <div class="box" id="box">
+
+        <div class="item">
+            Initial Item
+        </div>
+
+    </div>
+
+    <script>
+
+        const box = document.getElementById("box");
+        const add = document.getElementById("add");
+        const remove = document.getElementById("remove");
+        const toggle = document.getElementById("toggleWidth");
+
+        let counter = 1;
+        let wide = false;
+
+        //////////////////////////////////////////////////
+        // Resize Observer
+        //////////////////////////////////////////////////
+
+        const resizeObserver = new ResizeObserver(entries => {
+
+            const entry = entries[0];
+
+            console.log("========== ResizeObserver ==========");
+
+            console.log("Width :", entry.contentRect.width);
+
+            console.log("Height:", entry.contentRect.height);
+
+        });
+
+        resizeObserver.observe(box);
+
+        //////////////////////////////////////////////////
+        // Mutation Observer
+        //////////////////////////////////////////////////
+
+        const mutationObserver = new MutationObserver((mutations) => {
+
+            console.log("========== MutationObserver ==========");
+
+            mutations.forEach(mutation => {
+
+                console.log("Type:", mutation.type);
+
+                if (mutation.type === "childList") {
+
+                    console.log("Added:", mutation.addedNodes);
+
+                    console.log("Removed:", mutation.removedNodes);
+
+                }
+
+                if (mutation.type === "attributes") {
+
+                    console.log("Attribute Changed:", mutation.attributeName);
+
+                }
+
+            });
+
+        });
+
+        mutationObserver.observe(box, {
+            childList: true,
+            attributes: true,
+            subtree: true
+        });
+
+        //////////////////////////////////////////////////
+        // Buttons
+        //////////////////////////////////////////////////
+
+        add.onclick = () => {
+
+            const div = document.createElement("div");
+
+            div.className = "item";
+
+            div.textContent = "New Item " + counter++;
+
+            box.appendChild(div);
+
+        };
+
+        remove.onclick = () => {
+
+            if (box.lastElementChild) {
+
+                box.lastElementChild.remove();
+
+            }
+
+        };
+
+        toggle.onclick = () => {
+
+            wide = !wide;
+
+            box.style.width = wide
+                ? "600px"
+                : "300px";
+
+        };
+
+    </script>
+
+</body>
+
+</html>
