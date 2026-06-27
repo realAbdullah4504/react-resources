@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>ResizeObserver vs MutationObserver</title>
+    <title>Browser Observers Demo</title>
 
     <style>
         * {
@@ -13,55 +13,61 @@
         }
 
         body {
-            font-family: Arial, sans-serif;
+            font-family: Arial;
             padding: 30px;
         }
 
         button {
             padding: 10px 20px;
-            margin-right: 10px;
-            margin-bottom: 20px;
+            margin: 5px;
             cursor: pointer;
+        }
+
+        .spacer {
+            height: 900px;
+            background: #fafafa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+            color: #999;
         }
 
         .box {
             width: 300px;
             min-height: 120px;
-            border: 3px solid steelblue;
+            border: 4px solid steelblue;
             padding: 20px;
+            margin: auto;
             transition: .3s;
-            overflow: hidden;
         }
 
         .item {
-            padding: 8px;
-            margin: 5px 0;
             background: #eee;
+            padding: 10px;
+            margin: 8px 0;
         }
     </style>
+
 </head>
 
 <body>
 
-    <h2>ResizeObserver & MutationObserver Demo</h2>
+    <h1>Observer Demo</h1>
 
     <br>
 
-    <button id="add">
-        Add Content
-    </button>
+    <button id="add">Add Item</button>
+    <button id="remove">Remove Item</button>
+    <button id="toggleWidth">Toggle Width</button>
 
-    <button id="remove">
-        Remove Content
-    </button>
+    <br><br>
 
-    <button id="toggleWidth">
-        Toggle Width
-    </button>
+    <div class="spacer">
+        Scroll Down ↓
+    </div>
 
-    <hr><br>
-
-    <div class="box" id="box">
+    <div id="box" class="box">
 
         <div class="item">
             Initial Item
@@ -69,57 +75,67 @@
 
     </div>
 
+    <div class="spacer">
+        Bottom Spacer
+    </div>
+
     <script>
 
         const box = document.getElementById("box");
+
         const add = document.getElementById("add");
+
         const remove = document.getElementById("remove");
+
         const toggle = document.getElementById("toggleWidth");
 
         let counter = 1;
+
         let wide = false;
 
-        //////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////
         // Resize Observer
-        //////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////
 
         const resizeObserver = new ResizeObserver(entries => {
 
-            const entry = entries[0];
+            const rect = entries[0].contentRect;
+
+            console.clear();
 
             console.log("========== ResizeObserver ==========");
 
-            console.log("Width :", entry.contentRect.width);
+            console.log("Width :", rect.width);
 
-            console.log("Height:", entry.contentRect.height);
+            console.log("Height:", rect.height);
 
         });
 
         resizeObserver.observe(box);
 
-        //////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////
         // Mutation Observer
-        //////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////
 
         const mutationObserver = new MutationObserver((mutations) => {
 
             console.log("========== MutationObserver ==========");
 
-            mutations.forEach(mutation => {
+            mutations.forEach(m => {
 
-                console.log("Type:", mutation.type);
+                console.log("Type:", m.type);
 
-                if (mutation.type === "childList") {
+                if (m.type === "childList") {
 
-                    console.log("Added:", mutation.addedNodes);
+                    console.log("Added:", m.addedNodes.length);
 
-                    console.log("Removed:", mutation.removedNodes);
+                    console.log("Removed:", m.removedNodes.length);
 
                 }
 
-                if (mutation.type === "attributes") {
+                if (m.type === "attributes") {
 
-                    console.log("Attribute Changed:", mutation.attributeName);
+                    console.log("Attribute:", m.attributeName);
 
                 }
 
@@ -129,13 +145,38 @@
 
         mutationObserver.observe(box, {
             childList: true,
-            attributes: true,
-            subtree: true
+            subtree: true,
+            attributes: true
         });
 
-        //////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////
+        // Intersection Observer
+        /////////////////////////////////////////////////////////
+
+        const intersectionObserver = new IntersectionObserver((entries) => {
+
+            entries.forEach(entry => {
+
+                console.log("========== IntersectionObserver ==========");
+
+                console.log("Visible:", entry.isIntersecting);
+
+                console.log(
+                    "Intersection Ratio:",
+                    entry.intersectionRatio.toFixed(2)
+                );
+
+            });
+
+        }, {
+            threshold: [0, 0.25, 0.5, 0.75, 1]
+        });
+
+        intersectionObserver.observe(box);
+
+        /////////////////////////////////////////////////////////
         // Buttons
-        //////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////
 
         add.onclick = () => {
 
@@ -143,7 +184,7 @@
 
             div.className = "item";
 
-            div.textContent = "New Item " + counter++;
+            div.textContent = "Item " + counter++;
 
             box.appendChild(div);
 
