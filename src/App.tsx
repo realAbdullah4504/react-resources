@@ -1,4 +1,4 @@
-import './App.css'
+
 import CompoundComponents from './components/CompoundComponents'
 
 const post={

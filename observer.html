@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Browser Observers Demo</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial;
+            padding: 30px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        .spacer {
+            height: 900px;
+            background: #fafafa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+            color: #999;
+        }
+
+        .box {
+            width: 300px;
+            min-height: 120px;
+            border: 4px solid steelblue;
+            padding: 20px;
+            margin: auto;
+            transition: .3s;
+        }
+
+        .item {
+            background: #eee;
+            padding: 10px;
+            margin: 8px 0;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <h1>Observer Demo</h1>
+
+    <br>
+
+    <button id="add">Add Item</button>
+    <button id="remove">Remove Item</button>
+    <button id="toggleWidth">Toggle Width</button>
+
+    <br><br>
+
+    <div class="spacer">
+        Scroll Down ↓
+    </div>
+
+    <div id="box" class="box">
+
+        <div class="item">
+            Initial Item
+        </div>
+
+    </div>
+
+    <div class="spacer">
+        Bottom Spacer
+    </div>
+
+    <script>
+
+        const box = document.getElementById("box");
+
+        const add = document.getElementById("add");
+
+        const remove = document.getElementById("remove");
+
+        const toggle = document.getElementById("toggleWidth");
+
+        let counter = 1;
+
+        let wide = false;
+
+        /////////////////////////////////////////////////////////
+        // Resize Observer
+        /////////////////////////////////////////////////////////
+
+        const resizeObserver = new ResizeObserver(entries => {
+
+            const rect = entries[0].contentRect;
+
+            console.clear();
+
+            console.log("========== ResizeObserver ==========");
+
+            console.log("Width :", rect.width);
+
+            console.log("Height:", rect.height);
+
+        });
+
+        resizeObserver.observe(box);
+
+        /////////////////////////////////////////////////////////
+        // Mutation Observer
+        /////////////////////////////////////////////////////////
+
+        const mutationObserver = new MutationObserver((mutations) => {
+
+            console.log("========== MutationObserver ==========");
+
+            mutations.forEach(m => {
+
+                console.log("Type:", m.type);
+
+                if (m.type === "childList") {
+
+                    console.log("Added:", m.addedNodes.length);
+
+                    console.log("Removed:", m.removedNodes.length);
+
+                }
+
+                if (m.type === "attributes") {
+
+                    console.log("Attribute:", m.attributeName);
+
+                }
+
+            });
+
+        });
+
+        mutationObserver.observe(box, {
+            childList: true,
+            subtree: true,
+            attributes: true
+        });
+
+        /////////////////////////////////////////////////////////
+        // Intersection Observer
+        /////////////////////////////////////////////////////////
+
+        const intersectionObserver = new IntersectionObserver((entries) => {
+
+            entries.forEach(entry => {
+
+                console.log("========== IntersectionObserver ==========");
+
+                console.log("Visible:", entry.isIntersecting);
+
+                console.log(
+                    "Intersection Ratio:",
+                    entry.intersectionRatio.toFixed(2)
+                );
+
+            });
+
+        }, {
+            threshold: [0, 0.25, 0.5, 0.75, 1]
+        });
+
+        intersectionObserver.observe(box);
+
+        /////////////////////////////////////////////////////////
+        // Buttons
+        /////////////////////////////////////////////////////////
+
+        add.onclick = () => {
+
+            const div = document.createElement("div");
+
+            div.className = "item";
+
+            div.textContent = "Item " + counter++;
+
+            box.appendChild(div);
+
+        };
+
+        remove.onclick = () => {
+
+            if (box.lastElementChild) {
+
+                box.lastElementChild.remove();
+
+            }
+
+        };
+
+        toggle.onclick = () => {
+
+            wide = !wide;
+
+            box.style.width = wide
+                ? "600px"
+                : "300px";
+
+        };
+
+    </script>
+
+</body>
+
+</html>
