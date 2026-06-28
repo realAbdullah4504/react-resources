@@ -1,23 +1,23 @@
+import CompoundComponents from "./components/CompoundComponents";
+import { Counter } from "./components/Counter";
 
-import CompoundComponents from './components/CompoundComponents'
-
-const post={
-  name:"Abdullah",
-  title:"Welcome",
-  description:"hello Dear",
-}
+const post = {
+  name: "Abdullah",
+  title: "Welcome",
+  description: "hello Dear",
+};
 
 function App() {
-
   return (
     <>
+      <Counter />
       <CompoundComponents post={post}>
-      <CompoundComponents.Title/>
-      <CompoundComponents.Description/>
-      <CompoundComponents.Author/>
-     </CompoundComponents>
+        <CompoundComponents.Title />
+        <CompoundComponents.Description />
+        <CompoundComponents.Author />
+      </CompoundComponents>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
