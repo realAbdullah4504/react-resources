@@ -129,8 +129,9 @@
 //     let message = `Count is ${count}`;
 
 //     function log() {
-//         console.log(message);
-//         console.log(count);
+//         setTimeout(() => {
+//             console.log(count);
+//         }, 3000);
 //     }
 
 //     return [increment, log];
@@ -143,3 +144,29 @@
 // increment();
 
 // log();
+
+// increment();
+
+
+//
+function outer() {
+    let count = 0;
+
+    function log() {
+        console.log(count);
+    }
+
+    return {
+        log,
+        increment() {
+            count++;
+        }
+    };
+}
+
+const obj = outer();
+
+obj.increment();
+obj.increment();
+
+obj.log();
