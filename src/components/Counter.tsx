@@ -14,13 +14,15 @@ export function Counter() {
     }
 
     return (
+        <>
         <button
             onClick={() => {
-                handleClick();
-                setCount(1);
+                setCount((c) => c + 1);
             }}
         >
             Click
         </button>
+        <button onClick={handleClick}>Reset</button>
+        </>
     );
 }

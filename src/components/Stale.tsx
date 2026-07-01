@@ -24,7 +24,7 @@ export default function App() {
     return () => {
       window.removeEventListener("click", handler);
     };
-  }, []); // <-- Runs when count changes
+  }, []);
 
   return (
     <div>
