@@ -1,8 +1,11 @@
 import CompoundComponents from "./components/CompoundComponents";
 import { Counter } from "./components/Counter";
 import { Example } from "./components/HookOrder";
+import { LayoutEffect } from "./components/LayoutEffect";
+import { SideEffects } from "./components/SideEffects";
 import Stale from "./components/Stale";
 import { useState } from "react";
+import { Memo } from "./components/Memo";
 
 const post = {
   name: "Abdullah",
@@ -20,6 +23,9 @@ function App() {
   };
   return (
     <>
+    <Memo />
+    {/* <SideEffects /> */}
+    {/* <LayoutEffect /> */}
     {/* <Example/> */}
       {/* <Counter /> */}
       {/* <button onClick={handleClick}>Click</button> */}
