@@ -4,6 +4,7 @@ import AssistInsightsContainer from './components/AssistInsightsContainer.tsx';
 import ProceedWithoutAI from './components/ProceedWithoutAI.tsx';
 import CancelButton from './components/CancelButton.tsx';
 import ConsultationButton from './components/ConsultationButton.tsx';
+import StaleClosure from './components/StaleClosure.tsx';
 
 const AppContent = () => {
   const {
@@ -176,9 +177,10 @@ const AppContent = () => {
 
 function App() {
   return (
-    <TestProvider>
-      <AppContent />
-    </TestProvider>
+    // <TestProvider>
+    //   <AppContent />
+    // </TestProvider>
+    <StaleClosure/>
   );
 }
 
