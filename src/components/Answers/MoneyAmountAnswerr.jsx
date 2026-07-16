@@ -1,26 +1,37 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { CurrencyInput } from '@americanexpress/dls-react';
-import langPack from '../../../locale/langPack.json';
+
+import langPack from '../../locale/langPack.json';
 
 const MoneyAmountAnswer = ({
   answer,
   questionId,
-}) => (
-  <CurrencyInput
-    value={answer}
-    locale={langPack.globalValues.locale}
-    currency={langPack.globalValues.currencyCode}
-    id={`moneyAmountComponent-${questionId}`}
-    defaultValue=""
-    className="margin-2-l"
-    disabled="true"
-    style={{ width: 'fit-content' }}
-  />
-);
+}) => {
+  const { locale, currencyCode } = langPack.globalValues;
+  const numericValue = Number(answer) || 0;
+
+  return (
+    <div
+      id={`moneyAmountComponent-${questionId}`}
+      className="margin-2-l"
+      style={{ width: 'fit-content' }}
+    >
+      {new Intl.NumberFormat(locale, {
+        style: 'currency',
+        currency: currencyCode,
+      }).format(numericValue)}
+    </div>
+  );
+};
+
 MoneyAmountAnswer.propTypes = {
-  answer: PropTypes.string.isRequired,
-  questionId: PropTypes.string.isRequired,
+  answer: PropTypes.string,
+  questionId: PropTypes.string,
+};
+
+MoneyAmountAnswer.defaultProps = {
+  answer: '',
+  questionId: '',
 };
 
 export default MoneyAmountAnswer;

@@ -15,14 +15,14 @@ import {
 
 import RadioAnswer from './Answers/RadioAnswer';
 import DropdownAnswer from './Answers/DropdownAnswer';
-import MoneyAmountAnswer from './Answers/MoneyAmountAnswer';
+import MoneyAmountAnswer from './Answers/MoneyAmountAnswerr';
 import TextAnswer from './Answers/TextAnswer';
 import TextAreaAnswer from './Answers/TextAreaAnswer';
 import DateAnswer from './Answers/DateAnswer';
-import langPack from '../../locale/langPack.json';
+import langPack from '../locale/langPack.json';
 import TransactionTable from './Answers/TransactionTable';
 import BulkTableAnswer from './Answers/BulkTableAnswer';
-import PeerToPeerTableAnswer from './Answers/PeerToPeerTableAnswer';
+import PeerToPeerTableAnswer from './Answers/PeerToPeerTable';
 
 const Question = ({
   question,
@@ -35,17 +35,17 @@ const Question = ({
   } = question;
 
   const convertedAnswerType = new Map([
-    ['Text', ANSWER_TYPE_TEXT_SIMPLE],
-    ['MC', ANSWER_TYPE_TEXT_SIMPLE],
-    ['YesNo', ANSWER_TYPE_TEXT_SIMPLE],
+    ['Text', ANSWER_TYPE_TEXT],
+    ['MC', ANSWER_TYPE_RADIO],
+    ['YesNo', ANSWER_TYPE_RADIO],
     ['Label', ANSWER_TYPE_TEXT_SIMPLE],
-    ['AddTxn', ANSWER_TYPE_TEXT_SIMPLE],
-    ['CAdvTxn', ANSWER_TYPE_TEXT_SIMPLE],
-    ['DDL', ANSWER_TYPE_TEXT_SIMPLE],
-    ['Date', ANSWER_TYPE_TEXT_SIMPLE],
-    ['Amount', ANSWER_TYPE_TEXT_SIMPLE],
-    ['TextArea', ANSWER_TYPE_TEXT_SIMPLE],
-    ['OptText', ANSWER_TYPE_TEXT_SIMPLE],
+    ['AddTxn', ANSWER_TYPE_TRANSACTION],
+    ['CAdvTxn', ANSWER_TYPE_TRANSACTION],
+    ['DDL', ANSWER_TYPE_SELECT],
+    ['Date', ANSWER_TYPE_DATE],
+    ['Amount', ANSWER_TYPE_CURRENCY],
+    ['TextArea', ANSWER_TYPE_TEXTAREA],
+    ['OptText', ANSWER_TYPE_TEXT],
     ['BulkGrid', ANSWER_TYPE_BULK_GRID],
   ]);
 

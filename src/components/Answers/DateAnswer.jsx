@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { DatePicker } from '@americanexpress/dls-react';
 
-import langPack from '../../../locale/langPack.json';
+import langPack from '../../locale/langPack.json';
 
 const dateIsValidDB = (date) => /^\d{8}$/.test(date);
 
@@ -27,27 +26,32 @@ const DateAnswer = ({
         }).format(new Date(year, month, day))
       );
     }
-  }, []);
+  }, [selectedAnswer, locale]);
 
   return (
     <div className="margin-2-l pad-0-l pad-2-b">
-      <DatePicker
-        date={selectedAnswer === '' ? '' : displayDate}
-        format={langPack.globalValues.dateInputFormat}
+      <input
+        type="text"
         id={`datePickerComponent-${questionId}`}
-        autoFocus={displayDate}
-        locale={langPack.globalValues.locale}
-        defaultValue={displayDate}
+        value={displayDate}
         disabled="true"
+        readOnly
+        className="margin-2-l"
       />
     </div>
   );
 };
 
 DateAnswer.propTypes = {
-  selectedAnswer: PropTypes.string.isRequired,
-  questionId: PropTypes.string.isRequired,
-  locale: PropTypes.string.isRequired,
+  selectedAnswer: PropTypes.string,
+  questionId: PropTypes.string,
+  locale: PropTypes.string,
+};
+
+DateAnswer.defaultProps = {
+  selectedAnswer: '',
+  questionId: '',
+  locale: langPack.globalValues.locale,
 };
 
 export default DateAnswer;

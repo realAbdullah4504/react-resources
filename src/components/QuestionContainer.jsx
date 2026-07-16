@@ -1,16 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsiblePanel,
-} from '@americanexpress/dls-react';
 
-import format from 'date-fns/format';
-import { isValid } from 'date-fns';
-
-import { useIntl } from 'react-intl';
-import Question from './Question';
+import { useIntl } from '../utils/intl';
+import Question from './QUESTION';
 
 const QuestionContainer = ({
   claimQAInfo, transactions, locale, caseId,
@@ -18,17 +10,23 @@ const QuestionContainer = ({
   const intl = useIntl();
 
   const getDate = (dateString = '') => {
+    if (!/^\d{8}$/.test(dateString)) {
+      return '--';
+    }
     const year = dateString.slice(0, 4);
     const month = dateString.slice(4, 6) - 1;
     const day = dateString.slice(6, 8);
-
     const dateObj = new Date(year, month, day);
 
-    if (isValid(dateObj)) {
-      return format(dateObj, 'MMM d, yyyy');
+    if (Number.isNaN(dateObj.getTime())) {
+      return '--';
     }
 
-    return '--';
+    return new Intl.DateTimeFormat(locale, {
+      year: 'numeric',
+      month: 'short',
+      day: '2-digit',
+    }).format(dateObj);
   };
 
   const buildQuestion = (question, FCIARefNum) => {
@@ -73,7 +71,6 @@ const QuestionContainer = ({
       answerOptions = question?.TransactionSearch?.SelectedTransactions;
     }
 
-    // filter out empty values
     if (
       question?.QuestionDtls.QUES_TYPE_CD !== 'AddTxn'
       && question?.QuestionDtls.QUES_TYPE_CD !== 'CAdvTxn'
@@ -89,15 +86,13 @@ const QuestionContainer = ({
         ? question?.QuestionDtls?.QuestionVerbiage?.SPCL_PROP_IN
         : question?.QuestionDtls?.QuestionVerbiage?.VRBG_LONG_DS,
       transactions: question?.transactions
-        ? applicableTransactions : undefined, // For transaction-level questions
-      // For transaction-level questions
+        ? applicableTransactions : undefined,
       headerVerbiage: question?.QuestionDtls?.HeaderVerbiage?.VRBG_LONG_DS,
       bundleTransactions: question?.BundleTransactions,
     };
   };
 
   const getQuestions = (questionsArray, FCIARefNum) => {
-    // filter out all questions with pyDeletedObject = true, ccp changed the answer
     const filteredQuestions = questionsArray?.filter(
       (question) => question?.pyDeletedObject !== 'true'
     );
@@ -123,14 +118,12 @@ const QuestionContainer = ({
     ));
   };
 
-  /* eslint-disable max-len -- due to prettier formatting */
   const isHeaderSectionAvailable = claimQAInfo?.filter((qaInfo) => qaInfo?.FCIARefNum?.length > 0)?.length > 0;
-  /* eslint-enable max-len -- re-enabling for rest of file */
 
   return (
     <div className="flex flex-wrap flex-column margin-1-t">
       {isHeaderSectionAvailable ? (
-        <Collapsible>
+        <div>
           {claimQAInfo?.map((qaInfo) => {
             const {
               FCIARefNum,
@@ -141,12 +134,10 @@ const QuestionContainer = ({
             } = qaInfo;
             return (
               <div className="border" key={`border-${FCIARefNum}`}>
-                <CollapsiblePanel
-                  id={`collapsible-${FCIARefNum}`}
-                  key={`collapsible-${FCIARefNum}`}
-                >
-                  <div
+                <details id={`collapsible-${FCIARefNum}`}>
+                  <summary
                     className="flex flex-wrap flex-row flex-justify-between"
+                    style={{ cursor: 'pointer', padding: '8px' }}
                   >
                     <span className="flex">{FCIARefNum}</span>
                     <div className="flex" style={{ gap: '2rem' }}>
@@ -164,20 +155,20 @@ const QuestionContainer = ({
                       </span>
                       <span className="flex" style={{ whiteSpace: 'nowrap' }}>
                         <p className="label-2">
-                          Created on:&nbsp;
+                          {intl.formatMessage({ id: 'createdOn' })}&nbsp;
                         </p>
                         {getDate(CaseReceivedDate)}
                       </span>
                     </div>
+                  </summary>
+                  <div style={{ padding: '8px' }}>
+                    {getQuestions(PreviouslyEnteredProperties, FCIARefNum)}
                   </div>
-                </CollapsiblePanel>
-                <CollapsibleContent labelledBy={`collapsible-${FCIARefNum}`}>
-                  {getQuestions(PreviouslyEnteredProperties, FCIARefNum)}
-                </CollapsibleContent>
+                </details>
               </div>
             );
           })}
-        </Collapsible>
+        </div>
       )
         : getQuestions(
           claimQAInfo[0]?.PreviouslyEnteredProperties,

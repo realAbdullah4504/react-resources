@@ -1,109 +1,102 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  DataTableV2, DataTableBodyV2, DataTableCellV2,
-  DataTableHeadV2, DataTableRowV2, DataTableHeadCellV2,
-} from '@americanexpress/dls-react';
-import { FormattedMessage } from 'react-intl';
+
+import langPack from '../../locale/langPack.json';
 
 const TransactionTable = ({ selectedTransactions, locale, answerType }) => {
-  if (selectedTransactions?.length === 0 || selectedTransactions === undefined) {
-    return (
-      <FormattedMessage id="noSelectedTransactions" />
-    );
+  const t = (key) => langPack[key] || key;
+
+  if (!selectedTransactions || selectedTransactions.length === 0) {
+    return <span className="margin-2-l">{t('noSelectedTransactions')}</span>;
   }
 
+  const isAddTxn = answerType === 'AddTxn';
+
+  const formatDate = (dateStr = '') => {
+    if (!dateStr) return '--';
+    const parts = dateStr.split('-');
+    const date = new Date(parts[0], (parts[1] || 1) - 1, parts[2] || 1);
+    if (Number.isNaN(date.getTime())) return dateStr;
+    return new Intl.DateTimeFormat(locale, {
+      year: 'numeric',
+      month: 'short',
+      day: '2-digit',
+    }).format(date);
+  };
+
+  const headers = isAddTxn
+    ? [t('effectiveDate'), t('postedDate')]
+    : [t('transDate'), t('postedDate')];
+
+  headers.push(
+    t('seNumber'),
+    t('description'),
+    t('billedAmount'),
+    t('transAmount'),
+    t('transCode'),
+    t('type'),
+    t('stmtDate')
+  );
+  if (isAddTxn) headers.push(t('tid'));
+  headers.push(t('cardNo'));
+
   return (
-    <DataTableV2 id="tablev2-base-instance" striped="true" small="true" bordered="true">
-      <DataTableHeadV2>
-        <DataTableRowV2>
-          {answerType === 'AddTxn' ? (
-            <>
-              <DataTableHeadCellV2><FormattedMessage id="effectiveDate" /></DataTableHeadCellV2>
-              <DataTableHeadCellV2><FormattedMessage id="postedDate" /></DataTableHeadCellV2>
-            </>
-          )
-            : (
+    <table
+      id="tablev2-base-instance"
+      style={{ borderCollapse: 'collapse', width: '100%' }}
+    >
+      <thead>
+        <tr>
+          {headers.map((header) => (
+            <th
+              key={header}
+              style={{
+                border: '1px solid #ccc',
+                padding: '8px',
+                textAlign: 'left',
+                background: '#f5f5f5',
+              }}
+            >
+              {header}
+            </th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {selectedTransactions.map((transaction, index) => (
+          <tr key={transaction?.ReferenceID || index}>
+            {isAddTxn ? (
               <>
-                <DataTableHeadCellV2><FormattedMessage id="transDate" /></DataTableHeadCellV2>
-                <DataTableHeadCellV2><FormattedMessage id="postedDate" /></DataTableHeadCellV2>
+                <td style={cellStyle}>{formatDate(transaction?.TransactionEffDate)}</td>
+                <td style={cellStyle}>{formatDate(transaction?.TransactionPostDate)}</td>
+              </>
+            ) : (
+              <>
+                <td style={cellStyle}>{formatDate(transaction?.TransactionDate)}</td>
+                <td style={cellStyle}>{formatDate(transaction?.TransactionPostDate)}</td>
               </>
             )}
-          <DataTableHeadCellV2><FormattedMessage id="seNumber" /></DataTableHeadCellV2>
-          <DataTableHeadCellV2><FormattedMessage id="description" /></DataTableHeadCellV2>
-          <DataTableHeadCellV2 align="right"><FormattedMessage id="billedAmount" /></DataTableHeadCellV2>
-          <DataTableHeadCellV2 align="right"><FormattedMessage id="transAmount" /></DataTableHeadCellV2>
-          <DataTableHeadCellV2><FormattedMessage id="transCode" /></DataTableHeadCellV2>
-          <DataTableHeadCellV2><FormattedMessage id="type" /></DataTableHeadCellV2>
-          <DataTableHeadCellV2><FormattedMessage id="stmtDate" /></DataTableHeadCellV2>
-          {answerType === 'AddTxn' && (
-            <DataTableHeadCellV2><FormattedMessage id="tid" /></DataTableHeadCellV2>
-          )}
-          <DataTableHeadCellV2 align="right"><FormattedMessage id="cardNo" /></DataTableHeadCellV2>
-        </DataTableRowV2>
-      </DataTableHeadV2>
-      <DataTableBodyV2>
-        {selectedTransactions?.map((transaction) => (
-          <DataTableRowV2 key={transaction?.ReferenceID}>
-            {answerType === 'AddTxn' ? (
-              <>
-                <DataTableCellV2>
-                  {new Intl.DateTimeFormat(locale, {
-                    year: 'numeric',
-                    month: 'short',
-                    day: '2-digit',
-                  }).format(new Date(transaction?.TransactionEffDate.split('-')))}
-                </DataTableCellV2>
-                <DataTableCellV2>
-                  {new Intl.DateTimeFormat(locale, {
-                    year: 'numeric',
-                    month: 'short',
-                    day: '2-digit',
-                  }).format(new Date(transaction?.TransactionPostDate.split('-')))}
-                </DataTableCellV2>
-              </>
-            )
-              : (
-                <>
-                  <DataTableCellV2>
-                    {new Intl.DateTimeFormat(locale, {
-                      year: 'numeric',
-                      month: 'short',
-                      day: '2-digit',
-                    }).format(new Date(transaction?.TransactionDate.split('-')))}
-                  </DataTableCellV2>
-                  <DataTableCellV2>
-                    {new Intl.DateTimeFormat(locale, {
-                      year: 'numeric',
-                      month: 'short',
-                      day: '2-digit',
-                    }).format(new Date(transaction?.TransactionPostDate.split('-')))}
-                  </DataTableCellV2>
-                </>
-              )}
-            <DataTableCellV2>{transaction?.SENbr}</DataTableCellV2>
-            <DataTableCellV2>{transaction?.TransactionDescription}</DataTableCellV2>
-            <DataTableCellV2 align="right">{transaction?.BillingAmount} {transaction?.BillingCurrencyDesc}</DataTableCellV2>
-            <DataTableCellV2 align="right">{transaction?.TransactionAmount} {transaction?.TransactionCurrencyDesc}</DataTableCellV2>
-            <DataTableCellV2>{transaction?.TransCd}</DataTableCellV2>
-            <DataTableCellV2>{transaction?.MonetaryTypeCd}</DataTableCellV2>
-            <DataTableCellV2>
-              {new Intl.DateTimeFormat(locale, {
-                year: 'numeric',
-                month: 'short',
-                day: '2-digit',
-              }).format(new Date(transaction?.TransactionStmtDate.split('-')))}
-            </DataTableCellV2>
-            {answerType === 'AddTxn' && (
-              <DataTableCellV2>{transaction?.TID}</DataTableCellV2>
-            )}
-            <DataTableCellV2 align="right">{transaction?.AccountNumber.slice(11)}</DataTableCellV2>
-          </DataTableRowV2>
+            <td style={cellStyle}>{transaction?.SENbr || '--'}</td>
+            <td style={cellStyle}>{transaction?.TransactionDescription || '--'}</td>
+            <td style={cellStyle}>{`${transaction?.BillingAmount || ''} ${transaction?.BillingCurrencyDesc || ''}`}</td>
+            <td style={cellStyle}>{`${transaction?.TransactionAmount || ''} ${transaction?.TransactionCurrencyDesc || ''}`}</td>
+            <td style={cellStyle}>{transaction?.TransCd || '--'}</td>
+            <td style={cellStyle}>{transaction?.MonetaryTypeCd || '--'}</td>
+            <td style={cellStyle}>{formatDate(transaction?.TransactionStmtDate)}</td>
+            {isAddTxn && <td style={cellStyle}>{transaction?.TID || '--'}</td>}
+            <td style={cellStyle} align="right">{transaction?.AccountNumber?.slice(11) || '--'}</td>
+          </tr>
         ))}
-      </DataTableBodyV2>
-    </DataTableV2>
+      </tbody>
+    </table>
   );
 };
+
+const cellStyle = {
+  border: '1px solid #ccc',
+  padding: '8px',
+};
+
 TransactionTable.propTypes = {
   selectedTransactions: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   locale: PropTypes.string.isRequired,

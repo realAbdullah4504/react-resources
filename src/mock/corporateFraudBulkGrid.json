@@ -1,0 +1,300 @@
+{
+  "caseId": "C-161219698",
+  "RequestedTopic": "qna-details",
+  "RequestTrackingID": "20253df5-7015-4cb6-bc81-023aba8d4fb5",
+  "statusCode": "1",
+  "statusMessage": "Success",
+  "CaseInfo": {
+    "Advisor": {
+      "pxResults": [
+        {
+          "AdvisoryISOCode": "4554",
+          "CA_4554_InquiryMenu": "DlvrySchld",
+          "CAPSE": "4320712920",
+          "CaseReceivedDate": "20260407",
+          "ISO_InquiryMenuPath5_US": "EntireOrderNotRcvd",
+          "ISO_MainInquiryMenu": "CMnotRecdOrder_Item_Srvc",
+          "MAPSE": "4320432859",
+          "OutcomeAccepted": "true",
+          "OutcomeCode": "SETUP_001",
+          "ResolvewithMerchant": "True",
+          "StageSequence": "1",
+          "PreviouslyEnteredProperties": [
+            {
+              "MissingProperty": "US_ISO_MainInquiryMenu",
+              "PropertyName": "US_ISO_MainInquiryMenu",
+              "PropertyValue": "I haven't received the goods or services or the business cancelled my goods or serivces",
+              "PropertyValuePrev": "I haven't received the goods or services or the business cancelled my goods or serivces",
+              "QuestionDtls": {
+                "QUES_ID": "US_ISO_MainInquiryMenu",
+                "QUES_TYPE_CD": "MC",
+                "VRBG_ID": "I haven't receiv",
+                "OptionList": [
+                  {
+                    "QUES_OPTN_ID": "I don't recognize the charge",
+                    "QUES_OPTN_VAL_TX": "I don't recognize the charge",
+                    "OptionVerbiage": {
+                      "VRBG_LONG_DS": "I don't recognize the charge",
+                      "VRBG_SHORT_DS": "I don't recognize the charge"
+                    }
+                  },
+                  {
+                    "QUES_OPTN_ID": "I have cancelled or returned this purchase",
+                    "QUES_OPTN_VAL_TX": "I have cancelled or returned this purchase",
+                    "OptionVerbiage": {
+                      "VRBG_LONG_DS": "I have cancelled or returned this purchase",
+                      "VRBG_SHORT_DS": "I have cancelled or returned this purchase"
+                    }
+                  },
+                  {
+                    "QUES_OPTN_ID": "I haven't received the goods or services or the business cancelled my goods or serivces",
+                    "QUES_OPTN_VAL_TX": "I haven't received the goods or services or the business cancelled my goods or serivces",
+                    "OptionVerbiage": {
+                      "VRBG_LONG_DS": "I haven't received the goods or services or the business cancelled my goods or serivces",
+                      "VRBG_SHORT_DS": "I haven't received the goods or services or the business cancelled my goods or serivces"
+                    }
+                  }
+                ],
+                "QuestionVerbiage": {
+                  "VRBG_LONG_DS": "Select the option that best describes the reason for the dispute: (Any option selection of ICD question)"
+                }
+              }
+            },
+            {
+              "MissingProperty": "ISO_InquiryMenuPath5_US",
+              "PropertyName": "ISO_InquiryMenuPath5_US",
+              "PropertyValue": "Order/Service not received",
+              "PropertyValuePrev": "Order/Service not received",
+              "QuestionDtls": {
+                "QUES_ID": "ISO_InquiryMenuPath5_US",
+                "QUES_TYPE_CD": "MC",
+                "VRBG_ID": "Order/Service no",
+                "OptionList": [
+                  {
+                    "QUES_OPTN_ID": "Order/Service not received",
+                    "QUES_OPTN_VAL_TX": "Order/Service not received",
+                    "OptionVerbiage": {
+                      "VRBG_LONG_DS": "Order/Service not received",
+                      "VRBG_SHORT_DS": "Order/Service not received"
+                    }
+                  },
+                  {
+                    "QUES_OPTN_ID": "Received communication from merchant or became aware that the expected Goods/Services would not be provided or are canceled",
+                    "QUES_OPTN_VAL_TX": "Received communication from merchant or became aware that the expected Goods/Services would not be provided or are canceled",
+                    "OptionVerbiage": {
+                      "VRBG_LONG_DS": "Received communication from merchant or became aware that the expected Goods/Services would not be provided or are canceled",
+                      "VRBG_SHORT_DS": "Received communication from merchant or became aware that the expected Goods/Services would not be provided or are canceled"
+                    }
+                  },
+                  {
+                    "QUES_OPTN_ID": "Received written acknowledgement of a Credit due from the merchant",
+                    "QUES_OPTN_VAL_TX": "Received written acknowledgement of a Credit due from the merchant",
+                    "OptionVerbiage": {
+                      "VRBG_LONG_DS": "Received written acknowledgement of a Credit due from the merchant",
+                      "VRBG_SHORT_DS": "Received written acknowledgement of a Credit due from the merchant"
+                    }
+                  }
+                ],
+                "QuestionVerbiage": {
+                  "VRBG_LONG_DS": "Please select the best option below:"
+                }
+              }
+            },
+            {
+              "MissingProperty": "ONRDetails",
+              "PropertyName": "ONRDetails",
+              "PropertyValue": "Yes",
+              "PropertyValuePrev": "Yes",
+              "BundleTransactions": [
+                {
+                  "FirstName": "Sam",
+                  "LastName": "Smith",
+                  "DisputeAmount": "77012.41",
+                  "ExpectDeliveryDate": "20260402",
+                  "ProductName": "test",
+                  "TransReferenceNo": "320260850208871039"
+                },
+                {
+                  "FirstName": "Sam",
+                  "LastName": "Smith",
+                  "DisputeAmount": "65253.84",
+                  "ExpectDeliveryDate": "20260402",
+                  "ProductName": "test",
+                  "TransReferenceNo": "320260850208871170"
+                }
+              ],
+              "QuestionDtls": {
+                "QUES_ID": "ONRDetails",
+                "QUES_TYPE_CD": "BulkGrid",
+                "VRBG_ID": "Yes",
+                "OptionList": [],
+                "QuestionVerbiage": {
+                  "VRBG_LONG_DS": "Select applicable options"
+                }
+              }
+            },
+            {
+              "MissingProperty": "CA_4554_MerchHeldByCustoms",
+              "PropertyName": "CA_4554_MerchHeldByCustoms",
+              "PropertyValue": "No",
+              "PropertyValuePrev": "No",
+              "QuestionDtls": {
+                "QUES_ID": "CA_4554_MerchHeldByCustoms",
+                "QUES_TYPE_CD": "MC",
+                "VRBG_ID": "No",
+                "OptionList": [
+                  {
+                    "QUES_OPTN_ID": "Yes",
+                    "QUES_OPTN_VAL_TX": "Yes",
+                    "OptionVerbiage": {
+                      "VRBG_LONG_DS": "Yes",
+                      "VRBG_SHORT_DS": "Yes"
+                    }
+                  },
+                  {
+                    "QUES_OPTN_ID": "No",
+                    "QUES_OPTN_VAL_TX": "No",
+                    "OptionVerbiage": {
+                      "VRBG_LONG_DS": "No",
+                      "VRBG_SHORT_DS": "No"
+                    }
+                  }
+                ],
+                "QuestionVerbiage": {
+                  "VRBG_LONG_DS": "Is the merchandise being held/seized by Customs?"
+                }
+              }
+            },
+            {
+              "MissingProperty": "ResolvewithMerchant",
+              "PropertyName": "ResolvewithMerchant",
+              "PropertyValue": "Yes",
+              "PropertyValuePrev": "Yes",
+              "QuestionDtls": {
+                "QUES_ID": "ResolvewithMerchant",
+                "QUES_TYPE_CD": "MC",
+                "VRBG_ID": "Yes",
+                "OptionList": [
+                  {
+                    "QUES_OPTN_ID": "Yes",
+                    "QUES_OPTN_VAL_TX": "Yes",
+                    "OptionVerbiage": {
+                      "VRBG_LONG_DS": "Yes",
+                      "VRBG_SHORT_DS": "Yes"
+                    }
+                  },
+                  {
+                    "QUES_OPTN_ID": "No",
+                    "QUES_OPTN_VAL_TX": "No",
+                    "OptionVerbiage": {
+                      "VRBG_LONG_DS": "No",
+                      "VRBG_SHORT_DS": "No"
+                    }
+                  }
+                ],
+                "QuestionVerbiage": {
+                  "VRBG_LONG_DS": "Did you make any attempt to contact and resolve the matter with the Merchant?"
+                }
+              }
+            },
+            {
+              "MissingProperty": "merchantContactMethod",
+              "PropertyName": "merchantContactMethod",
+              "PropertyValue": "Phone",
+              "PropertyValuePrev": "Phone",
+              "pyDescription": "Phone",
+              "QuestionDtls": {
+                "QUES_ID": "merchantContactMethod",
+                "QUES_TYPE_CD": "DDL",
+                "VRBG_ID": "Phone",
+                "OptionList": [
+                  {
+                    "QUES_OPTN_ID": "Phone",
+                    "QUES_OPTN_VAL_TX": "Phone",
+                    "OptionVerbiage": {
+                      "VRBG_LONG_DS": "Phone",
+                      "VRBG_SHORT_DS": "Phone"
+                    }
+                  },
+                  {
+                    "QUES_OPTN_ID": "Mail",
+                    "QUES_OPTN_VAL_TX": "Mail",
+                    "OptionVerbiage": {
+                      "VRBG_LONG_DS": "Mail",
+                      "VRBG_SHORT_DS": "Mail"
+                    }
+                  }
+                ],
+                "QuestionVerbiage": {
+                  "VRBG_LONG_DS": "Please select the method by which the merchant was contacted:"
+                }
+              }
+            },
+            {
+              "MissingProperty": "dmDate",
+              "PropertyName": "dmDate",
+              "UserInputDate": "2026-04-02",
+              "QuestionDtls": {
+                "QUES_ID": "dmDate",
+                "QUES_TYPE_CD": "Date",
+                "OptionList": [],
+                "QuestionVerbiage": {
+                  "VRBG_LONG_DS": "Please provide the date the merchant was contacted to resolve this matter."
+                }
+              }
+            },
+            {
+              "MissingProperty": "CA_4554_InquiryMenu",
+              "PropertyName": "CA_4554_InquiryMenu",
+              "PropertyValue": "Delivery date for the merchandise was scheduled",
+              "PropertyValuePrev": "Delivery date for the merchandise was scheduled",
+              "QuestionDtls": {
+                "QUES_ID": "CA_4554_InquiryMenu",
+                "QUES_TYPE_CD": "MC",
+                "VRBG_ID": "Delivery date fo",
+                "OptionList": [
+                  {
+                    "QUES_OPTN_ID": "Delivery date for the merchandise was scheduled",
+                    "QUES_OPTN_VAL_TX": "Delivery date for the merchandise was scheduled",
+                    "OptionVerbiage": {
+                      "VRBG_LONG_DS": "Delivery date for the merchandise was scheduled",
+                      "VRBG_SHORT_DS": "Delivery date for the merchandise was scheduled"
+                    }
+                  },
+                  {
+                    "QUES_OPTN_ID": "Delivery date for the merchandise was unscheduled",
+                    "QUES_OPTN_VAL_TX": "Delivery date for the merchandise was unscheduled",
+                    "OptionVerbiage": {
+                      "VRBG_LONG_DS": "Delivery date for the merchandise was unscheduled",
+                      "VRBG_SHORT_DS": "Delivery date for the merchandise was unscheduled"
+                    }
+                  }
+                ],
+                "QuestionVerbiage": {
+                  "VRBG_LONG_DS": "Select an option from the choices presented below:"
+                }
+              }
+            },
+            {
+              "InputTextArea": "sjsj",
+              "MissingProperty": "ConfirmCompleteQA",
+              "PropertyName": "ConfirmCompleteQA",
+              "PropertyValue": "sjsj",
+              "PropertyValuePrev": "sjsj",
+              "QuestionDtls": {
+                "QUES_ID": "ConfirmCompleteQA",
+                "QUES_TYPE_CD": "TextArea",
+                "VRBG_ID": "sjsj",
+                "OptionList": [],
+                "QuestionVerbiage": {
+                  "VRBG_LONG_DS": "ONLY provide any additional information specific to the claim that has not been covered through the previous questions"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "Errors": []
+}
