@@ -5,7 +5,7 @@ import { useIntl } from '../utils/intl';
 import Question from './QUESTION';
 
 const QuestionContainer = ({
-  claimQAInfo, transactions, locale, caseId,
+  claimQAInfo, transactions, locale, caseId, isFirst,
 }) => {
   const intl = useIntl();
 
@@ -134,12 +134,15 @@ const QuestionContainer = ({
             } = qaInfo;
             return (
               <div className="border" key={`border-${FCIARefNum}`}>
-                <details id={`collapsible-${FCIARefNum}`}>
+                <details id={`collapsible-${FCIARefNum}`} open={isFirst}>
                   <summary
                     className="flex flex-wrap flex-row flex-justify-between"
                     style={{ cursor: 'pointer', padding: '8px' }}
                   >
-                    <span className="flex">{FCIARefNum}</span>
+                    <span className="flex">
+                      {FCIARefNum}
+                      {isFirst && <span style={{ marginLeft: '8px', fontWeight: 'bold' }}>(Current)</span>}
+                    </span>
                     <div className="flex" style={{ gap: '2rem' }}>
                       <span className="flex" style={{ whiteSpace: 'nowrap' }}>
                         <p className="label-2">
@@ -170,9 +173,26 @@ const QuestionContainer = ({
           })}
         </div>
       )
-        : getQuestions(
-          claimQAInfo[0]?.PreviouslyEnteredProperties,
-          claimQAInfo[0]?.FCIARefNum || caseId
+        : (
+          <div className="border">
+            <details id={`collapsible-${caseId}`} open={isFirst}>
+              <summary
+                className="flex flex-wrap flex-row flex-justify-between"
+                style={{ cursor: 'pointer', padding: '8px' }}
+              >
+                <span className="flex">
+                  {caseId}
+                  {isFirst && <span style={{ marginLeft: '8px', fontWeight: 'bold' }}>(Current)</span>}
+                </span>
+              </summary>
+              <div style={{ padding: '8px' }}>
+                {getQuestions(
+                  claimQAInfo[0]?.PreviouslyEnteredProperties,
+                  claimQAInfo[0]?.FCIARefNum || caseId
+                )}
+              </div>
+            </details>
+          </div>
         )}
     </div>
   );
@@ -183,6 +203,7 @@ QuestionContainer.propTypes = {
   locale: PropTypes.string.isRequired,
   transactions: PropTypes.shape([]),
   caseId: PropTypes.string,
+  isFirst: PropTypes.bool,
 };
 
 export default QuestionContainer;

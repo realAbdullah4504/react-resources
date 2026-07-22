@@ -12,37 +12,57 @@ const AxpServicingCaseClaimQaDetails = ({
   disputeId,
   journey,
 }) => {
-  const [qnaResp, setQnaResp] = useState({});
-  const [transactions, setTransactions] = useState({});
+  const [cases, setCases] = useState([]);
 
   useEffect(() => {
-    const { qnaObject, qnaTransactions } = formatQnaDetails(mockQnaData);
-    setQnaResp(qnaObject);
-    setTransactions(qnaTransactions);
+    // Handle both single case (old format) and multiple cases (new format)
+    if (mockQnaData.Cases && Array.isArray(mockQnaData.Cases)) {
+      // New format: array of cases
+      const processedCases = mockQnaData.Cases.map((caseData) => {
+        const { qnaObject, qnaTransactions } = formatQnaDetails(caseData);
+        return {
+          caseId: caseData.caseId,
+          qnaResp: qnaObject,
+          transactions: qnaTransactions,
+        };
+      });
+      setCases(processedCases);
+    } else {
+      // Old format: single case
+      const { qnaObject, qnaTransactions } = formatQnaDetails(mockQnaData);
+      setCases([{
+        caseId: mockQnaData.caseId || disputeId,
+        qnaResp: qnaObject,
+        transactions: qnaTransactions,
+      }]);
+    }
   }, []);
-
-  if (qnaResp?.Errors?.[0]?.description || !qnaResp?.CaseInfo) {
-    return (
-      <IntlProvider locale={locale} messages={languageData}>
-        <div className="pad-responsive flex flex-justify-center">
-          <h3 className="pad-1-l" data-testid="no-details-message">
-            {qnaResp.Errors?.[0]?.description || 'No details available'}
-          </h3>
-        </div>
-      </IntlProvider>
-    );
-  }
 
   return (
     <IntlProvider locale={locale} messages={languageData}>
-      <QuestionContainer
-        caseId={disputeId}
-        claimQAInfo={qnaResp?.CaseInfo.Advisor}
-        transactions={transactions}
-        locale={locale}
-        caseData={{}}
-        journeyName={journey?.name || ''}
-      />
+      {cases.map((caseData, index) => {
+        if (caseData?.qnaResp?.Errors?.[0]?.description || !caseData?.qnaResp?.CaseInfo) {
+          return (
+            <div key={caseData.caseId} className="pad-responsive flex flex-justify-center">
+              <h3 className="pad-1-l" data-testid="no-details-message">
+                {caseData?.qnaResp?.Errors?.[0]?.description || 'No details available'}
+              </h3>
+            </div>
+          );
+        }
+        return (
+        <QuestionContainer
+          key={caseData.caseId}
+          caseId={caseData.caseId}
+          claimQAInfo={caseData.qnaResp?.CaseInfo?.Advisor}
+          transactions={caseData.transactions}
+          locale={locale}
+          caseData={{}}
+          journeyName={journey?.name || ''}
+          isFirst={index === 0}
+        />
+        );
+      })}
     </IntlProvider>
   );
 };

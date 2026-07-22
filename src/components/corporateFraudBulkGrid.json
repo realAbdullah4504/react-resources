@@ -1,300 +1,636 @@
 {
-  "caseId": "C-161219698",
-  "RequestedTopic": "qna-details",
-  "RequestTrackingID": "20253df5-7015-4cb6-bc81-023aba8d4fb5",
-  "statusCode": "1",
-  "statusMessage": "Success",
-  "CaseInfo": {
-    "Advisor": {
-      "pxResults": [
-        {
-          "AdvisoryISOCode": "4554",
-          "CA_4554_InquiryMenu": "DlvrySchld",
-          "CAPSE": "4320712920",
-          "CaseReceivedDate": "20260407",
-          "ISO_InquiryMenuPath5_US": "EntireOrderNotRcvd",
-          "ISO_MainInquiryMenu": "CMnotRecdOrder_Item_Srvc",
-          "MAPSE": "4320432859",
-          "OutcomeAccepted": "true",
-          "OutcomeCode": "SETUP_001",
-          "ResolvewithMerchant": "True",
-          "StageSequence": "1",
-          "PreviouslyEnteredProperties": [
-            {
-              "MissingProperty": "US_ISO_MainInquiryMenu",
-              "PropertyName": "US_ISO_MainInquiryMenu",
-              "PropertyValue": "I haven't received the goods or services or the business cancelled my goods or serivces",
-              "PropertyValuePrev": "I haven't received the goods or services or the business cancelled my goods or serivces",
-              "QuestionDtls": {
-                "QUES_ID": "US_ISO_MainInquiryMenu",
-                "QUES_TYPE_CD": "MC",
-                "VRBG_ID": "I haven't receiv",
-                "OptionList": [
-                  {
-                    "QUES_OPTN_ID": "I don't recognize the charge",
-                    "QUES_OPTN_VAL_TX": "I don't recognize the charge",
-                    "OptionVerbiage": {
-                      "VRBG_LONG_DS": "I don't recognize the charge",
-                      "VRBG_SHORT_DS": "I don't recognize the charge"
-                    }
-                  },
-                  {
-                    "QUES_OPTN_ID": "I have cancelled or returned this purchase",
-                    "QUES_OPTN_VAL_TX": "I have cancelled or returned this purchase",
-                    "OptionVerbiage": {
-                      "VRBG_LONG_DS": "I have cancelled or returned this purchase",
-                      "VRBG_SHORT_DS": "I have cancelled or returned this purchase"
-                    }
-                  },
-                  {
-                    "QUES_OPTN_ID": "I haven't received the goods or services or the business cancelled my goods or serivces",
-                    "QUES_OPTN_VAL_TX": "I haven't received the goods or services or the business cancelled my goods or serivces",
-                    "OptionVerbiage": {
-                      "VRBG_LONG_DS": "I haven't received the goods or services or the business cancelled my goods or serivces",
-                      "VRBG_SHORT_DS": "I haven't received the goods or services or the business cancelled my goods or serivces"
-                    }
-                  }
-                ],
-                "QuestionVerbiage": {
-                  "VRBG_LONG_DS": "Select the option that best describes the reason for the dispute: (Any option selection of ICD question)"
-                }
-              }
-            },
-            {
-              "MissingProperty": "ISO_InquiryMenuPath5_US",
-              "PropertyName": "ISO_InquiryMenuPath5_US",
-              "PropertyValue": "Order/Service not received",
-              "PropertyValuePrev": "Order/Service not received",
-              "QuestionDtls": {
-                "QUES_ID": "ISO_InquiryMenuPath5_US",
-                "QUES_TYPE_CD": "MC",
-                "VRBG_ID": "Order/Service no",
-                "OptionList": [
-                  {
-                    "QUES_OPTN_ID": "Order/Service not received",
-                    "QUES_OPTN_VAL_TX": "Order/Service not received",
-                    "OptionVerbiage": {
-                      "VRBG_LONG_DS": "Order/Service not received",
-                      "VRBG_SHORT_DS": "Order/Service not received"
-                    }
-                  },
-                  {
-                    "QUES_OPTN_ID": "Received communication from merchant or became aware that the expected Goods/Services would not be provided or are canceled",
-                    "QUES_OPTN_VAL_TX": "Received communication from merchant or became aware that the expected Goods/Services would not be provided or are canceled",
-                    "OptionVerbiage": {
-                      "VRBG_LONG_DS": "Received communication from merchant or became aware that the expected Goods/Services would not be provided or are canceled",
-                      "VRBG_SHORT_DS": "Received communication from merchant or became aware that the expected Goods/Services would not be provided or are canceled"
-                    }
-                  },
-                  {
-                    "QUES_OPTN_ID": "Received written acknowledgement of a Credit due from the merchant",
-                    "QUES_OPTN_VAL_TX": "Received written acknowledgement of a Credit due from the merchant",
-                    "OptionVerbiage": {
-                      "VRBG_LONG_DS": "Received written acknowledgement of a Credit due from the merchant",
-                      "VRBG_SHORT_DS": "Received written acknowledgement of a Credit due from the merchant"
-                    }
-                  }
-                ],
-                "QuestionVerbiage": {
-                  "VRBG_LONG_DS": "Please select the best option below:"
-                }
-              }
-            },
-            {
-              "MissingProperty": "ONRDetails",
-              "PropertyName": "ONRDetails",
-              "PropertyValue": "Yes",
-              "PropertyValuePrev": "Yes",
-              "BundleTransactions": [
+    "caseId": "C-221905832",
+    "RequestedTopic": "qna-details",
+    "RequestTrackingID": "55227e72-da38-43b7-8761-5636506d384a",
+    "statusCode": "1",
+    "statusMessage": "Success",
+    "CaseInfo": {
+        "Advisor": {
+            "pxResults": [
                 {
-                  "FirstName": "Sam",
-                  "LastName": "Smith",
-                  "DisputeAmount": "77012.41",
-                  "ExpectDeliveryDate": "20260402",
-                  "ProductName": "test",
-                  "TransReferenceNo": "320260850208871039"
-                },
-                {
-                  "FirstName": "Sam",
-                  "LastName": "Smith",
-                  "DisputeAmount": "65253.84",
-                  "ExpectDeliveryDate": "20260402",
-                  "ProductName": "test",
-                  "TransReferenceNo": "320260850208871170"
+                    "CaseReceivedDate": "20260717",
+                    "OutcomeAccepted": "true",
+                    "OutcomeCode": "SETUP",
+                    "OutcomeMessage": "Fraud Claim was Successfully Submitted",
+                    "StageSequence": "1",
+                    "PreviouslyEnteredProperties": [
+                        {
+                            "MissingProperty": "review_for_previous_case",
+                            "PropertyName": "review_for_previous_case",
+                            "PropertyValue": "Yes",
+                            "PropertyValuePrev": "Yes",
+                            "QuestionDtls": {
+                                "QUES_ID": "review_for_previous_case",
+                                "QUES_TYPE_CD": "MC",
+                                "VRBG_ID": "Yes",
+                                "OptionList": [
+                                    {
+                                        "QUES_OPTN_ID": "Yes",
+                                        "QUES_OPTN_VAL_TX": "Yes",
+                                        "OptionVerbiage": {
+                                            "VRBG_LONG_DS": "Yes",
+                                            "VRBG_SHORT_DS": "Yes"
+                                        }
+                                    },
+                                    {
+                                        "QUES_OPTN_ID": "No",
+                                        "QUES_OPTN_VAL_TX": "No",
+                                        "OptionVerbiage": {
+                                            "VRBG_LONG_DS": "No",
+                                            "VRBG_SHORT_DS": "No"
+                                        }
+                                    }
+                                ],
+                                "QuestionVerbiage": {
+                                    "VRBG_LONG_DS": "Access ISP Case Management. Review previous cases to verify if any reported transactions were previously accepted, and untag them if applicable.\n"
+                                }
+                            }
+                        },
+                        {
+                            "MissingProperty": "card_fraud_location",
+                            "PropertyName": "card_fraud_location",
+                            "PropertyValue": "Yes",
+                            "PropertyValuePrev": "Yes",
+                            "QuestionDtls": {
+                                "QUES_ID": "card_fraud_location",
+                                "QUES_TYPE_CD": "MC",
+                                "VRBG_ID": "Yes",
+                                "OptionList": [
+                                    {
+                                        "QUES_OPTN_ID": "Yes",
+                                        "QUES_OPTN_VAL_TX": "Yes",
+                                        "OptionVerbiage": {
+                                            "VRBG_LONG_DS": "Yes",
+                                            "VRBG_SHORT_DS": "Yes"
+                                        }
+                                    },
+                                    {
+                                        "QUES_OPTN_ID": "No",
+                                        "QUES_OPTN_VAL_TX": "No",
+                                        "OptionVerbiage": {
+                                            "VRBG_LONG_DS": "No",
+                                            "VRBG_SHORT_DS": "No"
+                                        }
+                                    }
+                                ],
+                                "QuestionVerbiage": {
+                                    "VRBG_LONG_DS": "Did the Card Member have the affected Card in their possession at the time the fraud occurred?"
+                                }
+                            }
+                        },
+                        {
+                            "MissingProperty": "review_disputed_case",
+                            "PropertyName": "review_disputed_case",
+                            "PropertyValue": "Yes",
+                            "PropertyValuePrev": "Yes",
+                            "BundleTransactions": [
+                                {
+                                    "DisputeAmount": "1616.00",
+                                    "SENbr": "1010558831",
+                                    "SENm": "DAXKO",
+                                    "TransactionAmount": "1616.00",
+                                    "TransactionCurrencyDesc": "USD",
+                                    "TransactionDate": "2026-06-24",
+                                    "TransactionPostDate": "2026-06-25",
+                                    "TransReferenceNo": "600024020260625"
+                                },
+                                {
+                                    "DisputeAmount": "2371.00",
+                                    "SENbr": "1010558831",
+                                    "SENm": "DAXKO",
+                                    "TransactionAmount": "2371.00",
+                                    "TransactionCurrencyDesc": "USD",
+                                    "TransactionDate": "2026-06-08",
+                                    "TransactionPostDate": "2026-06-09",
+                                    "TransReferenceNo": "600065420260609"
+                                },
+                                {
+                                    "DisputeAmount": "1236.00",
+                                    "SENbr": "1010558831",
+                                    "SENm": "DAXKO",
+                                    "TransactionAmount": "1236.00",
+                                    "TransactionCurrencyDesc": "USD",
+                                    "TransactionDate": "2026-05-14",
+                                    "TransactionPostDate": "2026-05-14",
+                                    "TransReferenceNo": "600008420260514"
+                                },
+                                {
+                                    "cmNewInfo": "Yes",
+                                    "DisputeAmount": "1467.00",
+                                    "disputeClaimId": "Dispute case not resolved in CM's favor",
+                                    "DisputeID": "D-7344112",
+                                    "IsRedispute": "true",
+                                    "SENbr": "1010558831",
+                                    "SENm": "DAXKO",
+                                    "TransactionAmount": "1467.00",
+                                    "TransactionCurrencyDesc": "USD",
+                                    "TransactionDate": "2026-05-01",
+                                    "TransactionPostDate": "2026-05-01",
+                                    "TransReferenceNo": "600031220260501"
+                                },
+                                {
+                                    "DisputeAmount": "1567.00",
+                                    "SENbr": "1010696094",
+                                    "SENm": "MOBILE APPLIANCE COMPANY",
+                                    "TransactionAmount": "1567.00",
+                                    "TransactionCurrencyDesc": "USD",
+                                    "TransactionDate": "2026-06-24",
+                                    "TransactionPostDate": "2026-06-25",
+                                    "TransReferenceNo": "600016520260625"
+                                },
+                                {
+                                    "cmNewInfo": "Yes",
+                                    "DisputeAmount": "2018.00",
+                                    "disputeClaimId": "Dispute case not resolved in CM's favor",
+                                    "DisputeID": "D-7368497",
+                                    "IsRedispute": "true",
+                                    "SENbr": "1010696094",
+                                    "SENm": "MOBILE APPLIANCE COMPANY",
+                                    "TransactionAmount": "2018.00",
+                                    "TransactionCurrencyDesc": "USD",
+                                    "TransactionDate": "2026-05-14",
+                                    "TransactionPostDate": "2026-05-14",
+                                    "TransReferenceNo": "600009820260514"
+                                },
+                                {
+                                    "DisputeAmount": "1812.00",
+                                    "SENbr": "1010558831",
+                                    "SENm": "DAXKO",
+                                    "TransactionAmount": "1812.00",
+                                    "TransactionCurrencyDesc": "USD",
+                                    "TransactionDate": "2026-05-01",
+                                    "TransactionPostDate": "2026-05-01",
+                                    "TransReferenceNo": "600072520260501"
+                                },
+                                {
+                                    "DisputeAmount": "1065.00",
+                                    "SENbr": "1010696094",
+                                    "SENm": "MOBILE APPLIANCE COMPANY",
+                                    "TransactionAmount": "1065.00",
+                                    "TransactionCurrencyDesc": "USD",
+                                    "TransactionDate": "2026-06-24",
+                                    "TransactionPostDate": "2026-06-25",
+                                    "TransReferenceNo": "600010320260625"
+                                },
+                                {
+                                    "cmNewInfo": "Yes",
+                                    "DisputeAmount": "1738.00",
+                                    "disputeClaimId": "Dispute case not resolved in CM's favor",
+                                    "DisputeID": "D-7371023",
+                                    "IsRedispute": "true",
+                                    "SENbr": "1010696094",
+                                    "SENm": "MOBILE APPLIANCE COMPANY",
+                                    "TransactionAmount": "1738.00",
+                                    "TransactionCurrencyDesc": "USD",
+                                    "TransactionDate": "2026-06-08",
+                                    "TransactionPostDate": "2026-06-09",
+                                    "TransReferenceNo": "600066420260609"
+                                },
+                                {
+                                    "DisputeAmount": "1556.00",
+                                    "SENbr": "1010696094",
+                                    "SENm": "MOBILE APPLIANCE COMPANY",
+                                    "TransactionAmount": "1556.00",
+                                    "TransactionCurrencyDesc": "USD",
+                                    "TransactionDate": "2026-05-14",
+                                    "TransactionPostDate": "2026-05-14",
+                                    "TransReferenceNo": "600014920260514"
+                                },
+                                {
+                                    "DisputeAmount": "1240.00",
+                                    "SENbr": "1010558831",
+                                    "SENm": "DAXKO",
+                                    "TransactionAmount": "1240.00",
+                                    "TransactionCurrencyDesc": "USD",
+                                    "TransactionDate": "2026-05-01",
+                                    "TransactionPostDate": "2026-05-01",
+                                    "TransReferenceNo": "600001220260501"
+                                }
+                            ],
+                            "QuestionDtls": {
+                                "QUES_ID": "review_disputed_case",
+                                "QUES_TYPE_CD": "BulkGrid",
+                                "VRBG_ID": "Yes",
+                                "OptionList": [],
+                                "QuestionVerbiage": {
+                                    "VRBG_LONG_DS": "Below transaction is being re-disputed. Review the case and select appropriate option."
+                                }
+                            }
+                        },
+                        {
+                            "MissingProperty": "review_removed_disputed_case",
+                            "PropertyName": "review_removed_disputed_case",
+                            "PropertyValue": "Yes",
+                            "PropertyValuePrev": "Yes",
+                            "BundleTransactions": [
+                                {
+                                    "DisputeAmount": "1616.00",
+                                    "SENbr": "1010558831",
+                                    "SENm": "DAXKO",
+                                    "TransactionAmount": "1616.00",
+                                    "TransactionCurrencyDesc": "USD",
+                                    "TransactionDate": "2026-06-24",
+                                    "TransactionPostDate": "2026-06-25",
+                                    "TransReferenceNo": "600024020260625"
+                                },
+                                {
+                                    "DisputeAmount": "2371.00",
+                                    "SENbr": "1010558831",
+                                    "SENm": "DAXKO",
+                                    "TransactionAmount": "2371.00",
+                                    "TransactionCurrencyDesc": "USD",
+                                    "TransactionDate": "2026-06-08",
+                                    "TransactionPostDate": "2026-06-09",
+                                    "TransReferenceNo": "600065420260609"
+                                },
+                                {
+                                    "DisputeAmount": "1236.00",
+                                    "SENbr": "1010558831",
+                                    "SENm": "DAXKO",
+                                    "TransactionAmount": "1236.00",
+                                    "TransactionCurrencyDesc": "USD",
+                                    "TransactionDate": "2026-05-14",
+                                    "TransactionPostDate": "2026-05-14",
+                                    "TransReferenceNo": "600008420260514"
+                                },
+                                {
+                                    "cmNewInfo": "Yes",
+                                    "DisputeAmount": "1467.00",
+                                    "disputeClaimId": "Dispute case not resolved in CM's favor",
+                                    "DisputeID": "D-7344112",
+                                    "IsRedispute": "true",
+                                    "SENbr": "1010558831",
+                                    "SENm": "DAXKO",
+                                    "TransactionAmount": "1467.00",
+                                    "TransactionCurrencyDesc": "USD",
+                                    "TransactionDate": "2026-05-01",
+                                    "TransactionPostDate": "2026-05-01",
+                                    "TransReferenceNo": "600031220260501"
+                                },
+                                {
+                                    "DisputeAmount": "1567.00",
+                                    "SENbr": "1010696094",
+                                    "SENm": "MOBILE APPLIANCE COMPANY",
+                                    "TransactionAmount": "1567.00",
+                                    "TransactionCurrencyDesc": "USD",
+                                    "TransactionDate": "2026-06-24",
+                                    "TransactionPostDate": "2026-06-25",
+                                    "TransReferenceNo": "600016520260625"
+                                },
+                                {
+                                    "cmNewInfo": "Yes",
+                                    "DisputeAmount": "2018.00",
+                                    "disputeClaimId": "Dispute case not resolved in CM's favor",
+                                    "DisputeID": "D-7368497",
+                                    "IsRedispute": "true",
+                                    "SENbr": "1010696094",
+                                    "SENm": "MOBILE APPLIANCE COMPANY",
+                                    "TransactionAmount": "2018.00",
+                                    "TransactionCurrencyDesc": "USD",
+                                    "TransactionDate": "2026-05-14",
+                                    "TransactionPostDate": "2026-05-14",
+                                    "TransReferenceNo": "600009820260514"
+                                },
+                                {
+                                    "DisputeAmount": "1812.00",
+                                    "SENbr": "1010558831",
+                                    "SENm": "DAXKO",
+                                    "TransactionAmount": "1812.00",
+                                    "TransactionCurrencyDesc": "USD",
+                                    "TransactionDate": "2026-05-01",
+                                    "TransactionPostDate": "2026-05-01",
+                                    "TransReferenceNo": "600072520260501"
+                                },
+                                {
+                                    "DisputeAmount": "1065.00",
+                                    "SENbr": "1010696094",
+                                    "SENm": "MOBILE APPLIANCE COMPANY",
+                                    "TransactionAmount": "1065.00",
+                                    "TransactionCurrencyDesc": "USD",
+                                    "TransactionDate": "2026-06-24",
+                                    "TransactionPostDate": "2026-06-25",
+                                    "TransReferenceNo": "600010320260625"
+                                },
+                                {
+                                    "cmNewInfo": "Yes",
+                                    "DisputeAmount": "1738.00",
+                                    "disputeClaimId": "Dispute case not resolved in CM's favor",
+                                    "DisputeID": "D-7371023",
+                                    "IsRedispute": "true",
+                                    "SENbr": "1010696094",
+                                    "SENm": "MOBILE APPLIANCE COMPANY",
+                                    "TransactionAmount": "1738.00",
+                                    "TransactionCurrencyDesc": "USD",
+                                    "TransactionDate": "2026-06-08",
+                                    "TransactionPostDate": "2026-06-09",
+                                    "TransReferenceNo": "600066420260609"
+                                },
+                                {
+                                    "DisputeAmount": "1556.00",
+                                    "SENbr": "1010696094",
+                                    "SENm": "MOBILE APPLIANCE COMPANY",
+                                    "TransactionAmount": "1556.00",
+                                    "TransactionCurrencyDesc": "USD",
+                                    "TransactionDate": "2026-05-14",
+                                    "TransactionPostDate": "2026-05-14",
+                                    "TransReferenceNo": "600014920260514"
+                                },
+                                {
+                                    "DisputeAmount": "1240.00",
+                                    "SENbr": "1010558831",
+                                    "SENm": "DAXKO",
+                                    "TransactionAmount": "1240.00",
+                                    "TransactionCurrencyDesc": "USD",
+                                    "TransactionDate": "2026-05-01",
+                                    "TransactionPostDate": "2026-05-01",
+                                    "TransReferenceNo": "600001220260501"
+                                }
+                            ],
+                            "QuestionDtls": {
+                                "QUES_ID": "review_removed_disputed_case",
+                                "QUES_TYPE_CD": "BulkGrid",
+                                "VRBG_ID": "Yes",
+                                "OptionList": [],
+                                "QuestionVerbiage": {
+                                    "VRBG_LONG_DS": "The following transactions will be removed from the claim."
+                                }
+                            }
+                        },
+                        {
+                            "MissingProperty": "card_member_authorized",
+                            "PropertyName": "card_member_authorized",
+                            "PropertyValue": "No",
+                            "PropertyValuePrev": "No",
+                            "QuestionDtls": {
+                                "QUES_ID": "card_member_authorized",
+                                "QUES_TYPE_CD": "MC",
+                                "VRBG_ID": "No",
+                                "OptionList": [
+                                    {
+                                        "QUES_OPTN_ID": "No",
+                                        "QUES_OPTN_VAL_TX": "No",
+                                        "OptionVerbiage": {
+                                            "VRBG_LONG_DS": "No",
+                                            "VRBG_SHORT_DS": "No"
+                                        }
+                                    },
+                                    {
+                                        "QUES_OPTN_ID": "Yes",
+                                        "QUES_OPTN_VAL_TX": "Yes",
+                                        "OptionVerbiage": {
+                                            "VRBG_LONG_DS": "Yes",
+                                            "VRBG_SHORT_DS": "Yes"
+                                        }
+                                    },
+                                    {
+                                        "QUES_OPTN_ID": "Yes, Released to Account Manager/Program Administrator",
+                                        "QUES_OPTN_VAL_TX": "Yes, Released to Account Manager/Program Administrator",
+                                        "OptionVerbiage": {
+                                            "VRBG_LONG_DS": "Yes, Released to Account Manager/Program Administrator",
+                                            "VRBG_SHORT_DS": "Yes, Released to Account Manager/Program Administrator"
+                                        }
+                                    }
+                                ],
+                                "QuestionVerbiage": {
+                                    "VRBG_LONG_DS": "Did the card member authorize anyone else to use the card?"
+                                }
+                            }
+                        },
+                        {
+                            "MissingProperty": "replacement_card_verification",
+                            "PropertyName": "replacement_card_verification",
+                            "PropertyValue": "Yes",
+                            "PropertyValuePrev": "Yes",
+                            "QuestionDtls": {
+                                "QUES_ID": "replacement_card_verification",
+                                "QUES_TYPE_CD": "MC",
+                                "VRBG_ID": "Yes",
+                                "OptionList": [
+                                    {
+                                        "QUES_OPTN_ID": "Yes",
+                                        "QUES_OPTN_VAL_TX": "Yes",
+                                        "OptionVerbiage": {
+                                            "VRBG_LONG_DS": "Yes",
+                                            "VRBG_SHORT_DS": "Yes"
+                                        }
+                                    },
+                                    {
+                                        "QUES_OPTN_ID": "No",
+                                        "QUES_OPTN_VAL_TX": "No",
+                                        "OptionVerbiage": {
+                                            "VRBG_LONG_DS": "No",
+                                            "VRBG_SHORT_DS": "No"
+                                        }
+                                    }
+                                ],
+                                "QuestionVerbiage": {
+                                    "VRBG_LONG_DS": "Did you receive a replacement card ending in 1005?"
+                                }
+                            }
+                        },
+                        {
+                            "MissingProperty": "receipt_date",
+                            "PropertyName": "receipt_date",
+                            "UserInputDate": "2026-07-17",
+                            "QuestionDtls": {
+                                "QUES_ID": "receipt_date",
+                                "QUES_TYPE_CD": "Date",
+                                "OptionList": [],
+                                "QuestionVerbiage": {
+                                    "VRBG_LONG_DS": "If necessary, update the Receipt Date"
+                                }
+                            }
+                        },
+                        {
+                            "MissingProperty": "reject_reasons",
+                            "PropertyName": "reject_reasons",
+                            "PropertyValue": "None of the Above",
+                            "PropertyValuePrev": "None of the Above",
+                            "QuestionDtls": {
+                                "QUES_ID": "reject_reasons",
+                                "QUES_TYPE_CD": "MC",
+                                "VRBG_ID": "None of the Abov",
+                                "OptionList": [
+                                    {
+                                        "QUES_OPTN_ID": "This is a plasticless card",
+                                        "QUES_OPTN_VAL_TX": "This is a plasticless card",
+                                        "OptionVerbiage": {
+                                            "VRBG_LONG_DS": "This is a plasticless card",
+                                            "VRBG_SHORT_DS": "This is a plasticless card"
+                                        }
+                                    },
+                                    {
+                                        "QUES_OPTN_ID": "The card is in Corporation's name",
+                                        "QUES_OPTN_VAL_TX": "The card is in Corporation's name",
+                                        "OptionVerbiage": {
+                                            "VRBG_LONG_DS": "The card is in Corporation's name",
+                                            "VRBG_SHORT_DS": "The card is in Corporation's name"
+                                        }
+                                    },
+                                    {
+                                        "QUES_OPTN_ID": "Card Member's complete name is not on the account",
+                                        "QUES_OPTN_VAL_TX": "Card Member's complete name is not on the account",
+                                        "OptionVerbiage": {
+                                            "VRBG_LONG_DS": "Card Member's complete name is not on the account",
+                                            "VRBG_SHORT_DS": "Card Member's complete name is not on the account"
+                                        }
+                                    },
+                                    {
+                                        "QUES_OPTN_ID": "The charges were incurred by the true Card Member or additional",
+                                        "QUES_OPTN_VAL_TX": "The charges were incurred by the true Card Member or additional",
+                                        "OptionVerbiage": {
+                                            "VRBG_LONG_DS": "The charges were incurred by the true Card Member or additional",
+                                            "VRBG_SHORT_DS": "The charges were incurred by the true Card Member or additional"
+                                        }
+                                    },
+                                    {
+                                        "QUES_OPTN_ID": "The Card Member benefited from the use of the account",
+                                        "QUES_OPTN_VAL_TX": "The Card Member benefited from the use of the account",
+                                        "OptionVerbiage": {
+                                            "VRBG_LONG_DS": "The Card Member benefited from the use of the account",
+                                            "VRBG_SHORT_DS": "The Card Member benefited from the use of the account"
+                                        }
+                                    },
+                                    {
+                                        "QUES_OPTN_ID": "The Card Member agreed to payment arrangements",
+                                        "QUES_OPTN_VAL_TX": "The Card Member agreed to payment arrangements",
+                                        "OptionVerbiage": {
+                                            "VRBG_LONG_DS": "The Card Member agreed to payment arrangements",
+                                            "VRBG_SHORT_DS": "The Card Member agreed to payment arrangements"
+                                        }
+                                    },
+                                    {
+                                        "QUES_OPTN_ID": "The Card Member agreed to restitution",
+                                        "QUES_OPTN_VAL_TX": "The Card Member agreed to restitution",
+                                        "OptionVerbiage": {
+                                            "VRBG_LONG_DS": "The Card Member agreed to restitution",
+                                            "VRBG_SHORT_DS": "The Card Member agreed to restitution"
+                                        }
+                                    },
+                                    {
+                                        "QUES_OPTN_ID": "The Card Member has made a Scam or Social Engineering Claim",
+                                        "QUES_OPTN_VAL_TX": "The Card Member has made a Scam or Social Engineering Claim",
+                                        "OptionVerbiage": {
+                                            "VRBG_LONG_DS": "The Card Member has made a Scam or Social Engineering Claim",
+                                            "VRBG_SHORT_DS": "The Card Member has made a Scam or Social Engineering Claim"
+                                        }
+                                    },
+                                    {
+                                        "QUES_OPTN_ID": "Did transaction occur before or after employee's termination.",
+                                        "QUES_OPTN_VAL_TX": "Did transaction occur before or after employee's termination.",
+                                        "OptionVerbiage": {
+                                            "VRBG_LONG_DS": "Did transaction occur before or after employee's termination.",
+                                            "VRBG_SHORT_DS": "Did transaction occur before or after employee's termination."
+                                        }
+                                    },
+                                    {
+                                        "QUES_OPTN_ID": "None of the Above",
+                                        "QUES_OPTN_VAL_TX": "None of the Above",
+                                        "OptionVerbiage": {
+                                            "VRBG_LONG_DS": "None of the Above",
+                                            "VRBG_SHORT_DS": "None of the Above"
+                                        }
+                                    }
+                                ],
+                                "QuestionVerbiage": {
+                                    "VRBG_LONG_DS": "Do any of the following reject reasons or scenarios apply?"
+                                }
+                            }
+                        },
+                        {
+                            "MissingProperty": "card_replacement_required",
+                            "PropertyName": "card_replacement_required",
+                            "PropertyValue": "No, An error occurred during card replacement",
+                            "PropertyValuePrev": "No, An error occurred during card replacement",
+                            "QuestionDtls": {
+                                "QUES_ID": "card_replacement_required",
+                                "QUES_TYPE_CD": "MC",
+                                "VRBG_ID": "No, An error occ",
+                                "OptionList": [
+                                    {
+                                        "QUES_OPTN_ID": "Yes",
+                                        "QUES_OPTN_VAL_TX": "Yes",
+                                        "OptionVerbiage": {
+                                            "VRBG_LONG_DS": "Yes",
+                                            "VRBG_SHORT_DS": "Yes"
+                                        }
+                                    },
+                                    {
+                                        "QUES_OPTN_ID": "No, The caller will be dial transferred to complete the replacement , has declined the replacement at this time or is unauthorized",
+                                        "QUES_OPTN_VAL_TX": "No, The caller will be dial transferred to complete the replacement , has declined the replacement at this time or is unauthorized",
+                                        "OptionVerbiage": {
+                                            "VRBG_LONG_DS": "No, The caller will be dial transferred to complete the replacement , has declined the replacement at this time or is unauthorized",
+                                            "VRBG_SHORT_DS": "No, The caller will be dial transferred to complete the replacement , has declined the replacement at this time or is unauthorized"
+                                        }
+                                    },
+                                    {
+                                        "QUES_OPTN_ID": "No, The card member wants to cancel the account",
+                                        "QUES_OPTN_VAL_TX": "No, The card member wants to cancel the account",
+                                        "OptionVerbiage": {
+                                            "VRBG_LONG_DS": "No, The card member wants to cancel the account",
+                                            "VRBG_SHORT_DS": "No, The card member wants to cancel the account"
+                                        }
+                                    },
+                                    {
+                                        "QUES_OPTN_ID": "No, An error occurred during card replacement",
+                                        "QUES_OPTN_VAL_TX": "No, An error occurred during card replacement",
+                                        "OptionVerbiage": {
+                                            "VRBG_LONG_DS": "No, An error occurred during card replacement",
+                                            "VRBG_SHORT_DS": "No, An error occurred during card replacement"
+                                        }
+                                    }
+                                ],
+                                "QuestionVerbiage": {
+                                    "VRBG_LONG_DS": "Card Replacement is required. Has the card replacement been successfully completed?"
+                                }
+                            }
+                        },
+                        {
+                            "MissingProperty": "review_credit_notes",
+                            "PropertyName": "review_credit_notes",
+                            "UserInputDate": "2026-07-17",
+                            "QuestionDtls": {
+                                "QUES_ID": "review_credit_notes",
+                                "QUES_TYPE_CD": "Date",
+                                "OptionList": [],
+                                "QuestionVerbiage": {
+                                    "VRBG_LONG_DS": "Review Credit Notes. Were any of the transaction(s) previously CONFIRMED as fraud?"
+                                }
+                            }
+                        },
+                        {
+                            "MissingProperty": "review_account_notes",
+                            "PropertyName": "review_account_notes",
+                            "UserInputDate": "2026-07-17",
+                            "QuestionDtls": {
+                                "QUES_ID": "review_account_notes",
+                                "QUES_TYPE_CD": "Date",
+                                "OptionList": [],
+                                "QuestionVerbiage": {
+                                    "VRBG_LONG_DS": "Please review account notes and Card Member correspondence (Imaging): Was there information related to the fraud charge(s)?"
+                                }
+                            }
+                        },
+                        {
+                            "InputTextArea": "test",
+                            "MissingProperty": "case_notes",
+                            "PropertyName": "case_notes",
+                            "PropertyValue": "test",
+                            "PropertyValuePrev": "test",
+                            "QuestionDtls": {
+                                "QUES_ID": "case_notes",
+                                "QUES_TYPE_CD": "TextArea",
+                                "VRBG_ID": "test",
+                                "OptionList": [],
+                                "QuestionVerbiage": {
+                                    "VRBG_LONG_DS": "Enter your case notes and click Continue to create the fraud claim."
+                                }
+                            }
+                        }
+                    ]
                 }
-              ],
-              "QuestionDtls": {
-                "QUES_ID": "ONRDetails",
-                "QUES_TYPE_CD": "BulkGrid",
-                "VRBG_ID": "Yes",
-                "OptionList": [],
-                "QuestionVerbiage": {
-                  "VRBG_LONG_DS": "Select applicable options"
-                }
-              }
-            },
-            {
-              "MissingProperty": "CA_4554_MerchHeldByCustoms",
-              "PropertyName": "CA_4554_MerchHeldByCustoms",
-              "PropertyValue": "No",
-              "PropertyValuePrev": "No",
-              "QuestionDtls": {
-                "QUES_ID": "CA_4554_MerchHeldByCustoms",
-                "QUES_TYPE_CD": "MC",
-                "VRBG_ID": "No",
-                "OptionList": [
-                  {
-                    "QUES_OPTN_ID": "Yes",
-                    "QUES_OPTN_VAL_TX": "Yes",
-                    "OptionVerbiage": {
-                      "VRBG_LONG_DS": "Yes",
-                      "VRBG_SHORT_DS": "Yes"
-                    }
-                  },
-                  {
-                    "QUES_OPTN_ID": "No",
-                    "QUES_OPTN_VAL_TX": "No",
-                    "OptionVerbiage": {
-                      "VRBG_LONG_DS": "No",
-                      "VRBG_SHORT_DS": "No"
-                    }
-                  }
-                ],
-                "QuestionVerbiage": {
-                  "VRBG_LONG_DS": "Is the merchandise being held/seized by Customs?"
-                }
-              }
-            },
-            {
-              "MissingProperty": "ResolvewithMerchant",
-              "PropertyName": "ResolvewithMerchant",
-              "PropertyValue": "Yes",
-              "PropertyValuePrev": "Yes",
-              "QuestionDtls": {
-                "QUES_ID": "ResolvewithMerchant",
-                "QUES_TYPE_CD": "MC",
-                "VRBG_ID": "Yes",
-                "OptionList": [
-                  {
-                    "QUES_OPTN_ID": "Yes",
-                    "QUES_OPTN_VAL_TX": "Yes",
-                    "OptionVerbiage": {
-                      "VRBG_LONG_DS": "Yes",
-                      "VRBG_SHORT_DS": "Yes"
-                    }
-                  },
-                  {
-                    "QUES_OPTN_ID": "No",
-                    "QUES_OPTN_VAL_TX": "No",
-                    "OptionVerbiage": {
-                      "VRBG_LONG_DS": "No",
-                      "VRBG_SHORT_DS": "No"
-                    }
-                  }
-                ],
-                "QuestionVerbiage": {
-                  "VRBG_LONG_DS": "Did you make any attempt to contact and resolve the matter with the Merchant?"
-                }
-              }
-            },
-            {
-              "MissingProperty": "merchantContactMethod",
-              "PropertyName": "merchantContactMethod",
-              "PropertyValue": "Phone",
-              "PropertyValuePrev": "Phone",
-              "pyDescription": "Phone",
-              "QuestionDtls": {
-                "QUES_ID": "merchantContactMethod",
-                "QUES_TYPE_CD": "DDL",
-                "VRBG_ID": "Phone",
-                "OptionList": [
-                  {
-                    "QUES_OPTN_ID": "Phone",
-                    "QUES_OPTN_VAL_TX": "Phone",
-                    "OptionVerbiage": {
-                      "VRBG_LONG_DS": "Phone",
-                      "VRBG_SHORT_DS": "Phone"
-                    }
-                  },
-                  {
-                    "QUES_OPTN_ID": "Mail",
-                    "QUES_OPTN_VAL_TX": "Mail",
-                    "OptionVerbiage": {
-                      "VRBG_LONG_DS": "Mail",
-                      "VRBG_SHORT_DS": "Mail"
-                    }
-                  }
-                ],
-                "QuestionVerbiage": {
-                  "VRBG_LONG_DS": "Please select the method by which the merchant was contacted:"
-                }
-              }
-            },
-            {
-              "MissingProperty": "dmDate",
-              "PropertyName": "dmDate",
-              "UserInputDate": "2026-04-02",
-              "QuestionDtls": {
-                "QUES_ID": "dmDate",
-                "QUES_TYPE_CD": "Date",
-                "OptionList": [],
-                "QuestionVerbiage": {
-                  "VRBG_LONG_DS": "Please provide the date the merchant was contacted to resolve this matter."
-                }
-              }
-            },
-            {
-              "MissingProperty": "CA_4554_InquiryMenu",
-              "PropertyName": "CA_4554_InquiryMenu",
-              "PropertyValue": "Delivery date for the merchandise was scheduled",
-              "PropertyValuePrev": "Delivery date for the merchandise was scheduled",
-              "QuestionDtls": {
-                "QUES_ID": "CA_4554_InquiryMenu",
-                "QUES_TYPE_CD": "MC",
-                "VRBG_ID": "Delivery date fo",
-                "OptionList": [
-                  {
-                    "QUES_OPTN_ID": "Delivery date for the merchandise was scheduled",
-                    "QUES_OPTN_VAL_TX": "Delivery date for the merchandise was scheduled",
-                    "OptionVerbiage": {
-                      "VRBG_LONG_DS": "Delivery date for the merchandise was scheduled",
-                      "VRBG_SHORT_DS": "Delivery date for the merchandise was scheduled"
-                    }
-                  },
-                  {
-                    "QUES_OPTN_ID": "Delivery date for the merchandise was unscheduled",
-                    "QUES_OPTN_VAL_TX": "Delivery date for the merchandise was unscheduled",
-                    "OptionVerbiage": {
-                      "VRBG_LONG_DS": "Delivery date for the merchandise was unscheduled",
-                      "VRBG_SHORT_DS": "Delivery date for the merchandise was unscheduled"
-                    }
-                  }
-                ],
-                "QuestionVerbiage": {
-                  "VRBG_LONG_DS": "Select an option from the choices presented below:"
-                }
-              }
-            },
-            {
-              "InputTextArea": "sjsj",
-              "MissingProperty": "ConfirmCompleteQA",
-              "PropertyName": "ConfirmCompleteQA",
-              "PropertyValue": "sjsj",
-              "PropertyValuePrev": "sjsj",
-              "QuestionDtls": {
-                "QUES_ID": "ConfirmCompleteQA",
-                "QUES_TYPE_CD": "TextArea",
-                "VRBG_ID": "sjsj",
-                "OptionList": [],
-                "QuestionVerbiage": {
-                  "VRBG_LONG_DS": "ONLY provide any additional information specific to the claim that has not been covered through the previous questions"
-                }
-              }
-            }
-          ]
+            ]
         }
-      ]
-    }
-  },
-  "Errors": []
+    },
+    "Errors": []
 }

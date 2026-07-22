@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { CasePage } from './components/CasePage.tsx';
 import AxpServicingCaseClaimQaDetails from './components/AxpServicingCaseClaimQaDetails';
 import langPack from './locale/langPack.json';
+import Accordion from './components/Collapsable.tsx';
 
 const SandboxQaDetails = () => (
   <AxpServicingCaseClaimQaDetails
@@ -21,6 +22,7 @@ function App() {
           <Route path="/" element={<Navigate to="/case" replace />} />
           <Route path="/case" element={<CasePage />} />
           <Route path="/sandbox" element={<SandboxQaDetails />} />
+          <Route path="/collapse" element={<Accordion />} />
         </Routes>
       </TestProvider>
     </BrowserRouter>
