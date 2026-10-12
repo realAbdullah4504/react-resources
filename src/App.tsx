@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Memo } from "./components/Memo";
 import Transition from "./components/Transition";
 import StaleState from "./components/StaleState";
+import { EmployeeForm } from "./components/forms/EmployeeFrom";
 
 const post = {
   name: "Abdullah",
@@ -19,12 +20,13 @@ function App() {
   };
   return (
     <>
-    <StaleState />
-    {/* <Memo />
+      <EmployeeForm />
+      {/* <StaleState /> */}
+      {/* <Memo />
     <Transition /> */}
-    {/* <SideEffects /> */}
-    {/* <LayoutEffect /> */}
-    {/* <Example/> */}
+      {/* <SideEffects /> */}
+      {/* <LayoutEffect /> */}
+      {/* <Example/> */}
       {/* <Counter /> */}
       {/* <button onClick={handleClick}>Click</button> */}
       {/* <Stale /> */}

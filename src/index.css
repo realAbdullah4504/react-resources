@@ -1,0 +1,215 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: #292d32;
+  background: #f3f5f7;
+}
+
+button,
+select,
+input {
+  font: inherit;
+}
+
+button {
+  padding: 10px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.sandbox {
+  max-width: 1050px;
+  margin: 32px auto;
+  padding: 20px;
+}
+
+.sandbox-header,
+.footer-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.sandbox-header {
+  margin-bottom: 24px;
+}
+
+.sandbox-header h1 {
+  margin: 0 0 8px;
+}
+
+.sandbox-header p {
+  margin: 0;
+  color: #626b75;
+}
+
+.sandbox-header label,
+.intent-select {
+  display: grid;
+  gap: 8px;
+}
+
+select {
+  padding: 9px;
+  border: 1px solid #aab3bc;
+  border-radius: 4px;
+  background: white;
+}
+
+.demo-panel {
+  padding: 20px;
+  background: white;
+  border: 1px solid #d7dce1;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.demo-panel h2 {
+  margin-top: 0;
+}
+
+.transaction {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 10px 0;
+}
+
+.transaction label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.footer-bar {
+  background: white;
+  border-radius: 8px;
+  padding: 16px;
+  border: 1px solid #d7dce1;
+}
+
+.footer-left,
+.footer-right {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.footer-right {
+  margin-left: auto;
+}
+
+.intent-select {
+  min-width: 210px;
+}
+
+.primary {
+  background: #006fcf;
+  color: white;
+  border: 1px solid #006fcf;
+}
+
+.secondary {
+  color: #006fcf;
+  background: white;
+  border: 1px solid #006fcf;
+}
+
+.alert {
+  padding: 12px 16px;
+  margin-top: 12px;
+  border-radius: 5px;
+}
+
+.alert.error {
+  background: #fff0ef;
+  border: 1px solid #d99a94;
+  color: #8b211a;
+}
+
+.alert.info {
+  background: #edf6ff;
+  border: 1px solid #a9cbe9;
+  color: #234e70;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgb(0 0 0 / 45%);
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  z-index: 10;
+}
+
+.dialog {
+  background: white;
+  width: 100%;
+  max-width: 420px;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 10px 40px rgb(0 0 0 / 20%);
+}
+
+.dialog h2 {
+  margin-top: 0;
+}
+
+.dialog p {
+  line-height: 1.5;
+  margin-bottom: 24px;
+}
+
+.full-width {
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.error {
+  color: #8b211a;
+}
+
+.success {
+  color: #2d5a27;
+}
+
+@media (max-width: 650px) {
+  .sandbox {
+    margin: 10px auto;
+    padding: 12px;
+  }
+
+  .footer-bar {
+    align-items: stretch;
+  }
+
+  .footer-left,
+  .footer-right {
+    width: 100%;
+  }
+
+  .footer-right > button,
+  .footer-right > .intent-select {
+    flex: 1;
+  }
+}
