@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Memo } from "./components/Memo";
 import Transition from "./components/Transition";
+import StaleState from "./components/StaleState";
 
 const post = {
   name: "Abdullah",
@@ -18,8 +19,9 @@ function App() {
   };
   return (
     <>
-    <Memo />
-    <Transition />
+    <StaleState />
+    {/* <Memo />
+    <Transition /> */}
     {/* <SideEffects /> */}
     {/* <LayoutEffect /> */}
     {/* <Example/> */}
